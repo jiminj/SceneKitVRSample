@@ -10,90 +10,139 @@ import UIKit
 import SceneKit
 import SceneKit.ModelIO
 
+class ModelInformation {
+    var filename:String
+    var scale:SCNVector3
+    init(filename:String, scale:SCNVector3) {
+        self.filename = filename
+        self.scale = scale
+    }
+}
+
 class ViewController: UIViewController {
 
     var sampleView: SampleView { return self.view as! SampleView }
     let scene = SCNScene()
+    let cameraNode = SCNNode()
+
+    
+    var boundaryOffset:Float = 20
+    var roomBoundaryAbs:Float = 280
+    var roomWidth:Float = 600 {
+        willSet{
+            roomBoundaryAbs = newValue / 2 - boundaryOffset
+        }
+    }
+    var roomHeight:Float = 200
+    
+    var cameraInitPos:SCNVector3 = SCNVector3()
+    var cameraLastPos:SCNVector3 = SCNVector3()
+    var cameraInitAng:SCNVector3 = SCNVector3()
+    var cameraLastAng:SCNVector3 = SCNVector3()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-//        let scene = SCNScene()
+
+        //initialize the scene
         sampleView.scene = scene
         sampleView.backgroundColor = UIColor.whiteColor()
-        sampleView.allowsCameraControl = true
-        sampleView.autoenablesDefaultLighting = true
-        let rootNode = sampleView.scene?.rootNode
+        sampleView.showsStatistics = true
+        roomWidth = 600
+        roomHeight = 200
         
+        //add gesture control
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
+        self.view.addGestureRecognizer(panGestureRecognizer)
         
-        generateRoom(600, height: 200, floorTextureName: "samples.scnassets/wood.png", wallTextureName: "samples.scnassets/wall.jpg")
+        setupEnvironment()
+        generateRoom(roomWidth, height: roomHeight, floorTextureName: "samples.scnassets/wood.png", wallTextureName: "samples.scnassets/wall.jpg")
+        addLights()
         
-//        //Walls
-//        let wallWidth:Float = 400
-//        let wallHeight:Float = 100
-//        let halfWallWidth:Float = wallWidth / 2
-//        let halfWallHeight:Float = wallHeight / 2
-//        
-//        let wall = SCNPlane(width: CGFloat(wallWidth), height: CGFloat(wallHeight))
-//        wall.firstMaterial?.diffuse.contents = "samples.scnassets/wall.jpg"
-//        wall.firstMaterial?.diffuse.contentsTransform = SCNMatrix4Mult(SCNMatrix4MakeScale(24, 2, 1), SCNMatrix4MakeTranslation(0, 1, 0))
-//        wall.firstMaterial?.diffuse.wrapS = SCNWrapMode.Repeat
-//        wall.firstMaterial?.diffuse.wrapT = SCNWrapMode.Mirror
-//        wall.firstMaterial?.doubleSided = false
-//        wall.firstMaterial?.locksAmbientWithDiffuse = false
-//        
-//        var wallNode = SCNNode(geometry: wall)
-//        wallNode.position = SCNVector3Make(0, halfWallHeight, -halfWallWidth);
-//        scene.rootNode.addChildNode(wallNode)
-//
-//        wallNode = wallNode.clone()
-//        wallNode.position = SCNVector3Make(-halfWallWidth, halfWallHeight, 0);
-//        wallNode.rotation = SCNVector4Make(0, 1, 0, Float(M_PI_2));
-//        scene.rootNode.addChildNode(wallNode)
-//
-//        wallNode = wallNode.clone()
-//        wallNode.position = SCNVector3Make(halfWallWidth, halfWallHeight, 0);
-//        wallNode.rotation = SCNVector4Make(0, 1, 0, Float(-M_PI_2));
-//        scene.rootNode.addChildNode(wallNode)
-//        
-//        wallNode = wallNode.clone()
-//        wallNode.position = SCNVector3Make(0, halfWallHeight, halfWallWidth);
-//        wallNode.rotation = SCNVector4Make(0, 1, 0, Float(M_PI));
-//        scene.rootNode.addChildNode(wallNode)
-//        
-//        
-//        let step:Float = 3.0
-//        let initRadius:CGFloat = 1.0
-//        let numSpheres:Int = 20
-//
-//        var x:Float = 0.0
-//        var radius:CGFloat = initRadius
-//        
-//        for i in 0..<numSpheres {
-//            var sphereColor = UIColor.greenColor()
-//            if i % 2 == 0 {
-//                sphereColor = UIColor.redColor()
-//            }
-//            let node = SCNNode(geometry: SCNSphere(radius: radius))
-//            node.geometry?.firstMaterial?.diffuse.contents = sphereColor
-//            node.position = SCNVector3(x, 3.0, 0.0)
-//            rootNode?.addChildNode(node)
-//            x += 2 * Float(radius) - 0.05
-//            radius -= 0.05
-//        }
-//
+        let Models:[ModelInformation] = [
+            ModelInformation(filename: "samples.scnassets/Writing_Desk.scn", scale: SCNVector3Make(1.0, 1.0, 1.0)),
+            ModelInformation(filename: "samples.scnassets/Wood_Table.dae", scale: SCNVector3Make(100.0, 100.0, 100.0)),
+            ModelInformation(filename: "samples.scnassets/cat.scn", scale: SCNVector3Make(50.0, 50.0, 50.0)),
+            ModelInformation(filename: "samples.scnassets/Wooden_Chair.scn", scale: SCNVector3Make(50.0, 50.0, 50.0)),
+            ModelInformation(filename: "samples.scnassets/Ambulance.scn", scale: SCNVector3Make(0.2, 0.2, 0.2))
+        ]
+        
+        addModels(Models, radius:200)
 
-        let deskScene = SCNScene(named: "samples.scnassets/Writing_Desk.scn")!
-        let deskNode = deskScene.rootNode.childNodeWithName("desk", recursively: true)!
-        scene.rootNode.addChildNode(deskNode)
-        
     }
+    
+    //temporal solution
+    var currentGestureNumberOfTouches = 0;
 
+    func handlePan(gestureRecognizer: UIPanGestureRecognizer) {
+        if(gestureRecognizer.state == UIGestureRecognizerState.Began)
+        {
+            cameraInitAng = cameraNode.eulerAngles
+            cameraInitPos = cameraNode.position
+            currentGestureNumberOfTouches = gestureRecognizer.numberOfTouches()
+            return
+        }
+        if(gestureRecognizer.state == UIGestureRecognizerState.Ended)
+        {
+            currentGestureNumberOfTouches = 0
+            return
+        }
+
+//        if(gestureRecognizer.numberOfTouches() > 1) {
+        if(currentGestureNumberOfTouches > 1) {
+            moveCamera(gestureRecognizer.translationInView(self.view))
+            return
+        }
+        else {
+            tiltCamera(gestureRecognizer.translationInView(self.view))
+            return
+        }
+    }
+    
+    func tiltCamera(point:CGPoint) {
+        let newCameraAngY = cameraInitAng.y + Float(point.x) * 0.005
+        var newCameraAngX = cameraInitAng.x + Float(point.y) * 0.005
+        if(abs(newCameraAngX) > Float(M_PI_4)) { newCameraAngX = cameraLastAng.x }
+        
+        cameraNode.eulerAngles.x = newCameraAngX
+        cameraNode.eulerAngles.y = newCameraAngY
+        
+        cameraLastAng = cameraNode.eulerAngles
+    }
+    
+    
+    func moveCamera(point:CGPoint) {
+        let cosAngY = cos(cameraNode.eulerAngles.y)
+        let sinAngY = sin(cameraNode.eulerAngles.y)
+        var newCameraPosX = cameraInitPos.x - Float(point.x) * cosAngY - Float(point.y) * sinAngY
+        var newCameraPosZ = cameraInitPos.z + Float(point.x) * sinAngY - Float(point.y) * cosAngY
+
+        if(abs(newCameraPosX) > roomBoundaryAbs) { newCameraPosX = cameraLastPos.x }
+        if(abs(newCameraPosZ) > roomBoundaryAbs) { newCameraPosZ = cameraLastPos.z }
+        
+        cameraNode.position.x = newCameraPosX
+        cameraNode.position.z = newCameraPosZ
+
+        cameraLastPos = cameraNode.position
+    }
+    
+
+    func setupEnvironment() {
+//        sampleView.allowsCameraControl = true
+
+        //camera
+        let camera = SCNCamera()
+        camera.automaticallyAdjustsZRange = true
+        cameraNode.position = SCNVector3(x: 0, y: 100, z: 0)
+        cameraNode.camera = camera
+        scene.rootNode.addChildNode(cameraNode)
+//        sampleView.autoenablesDefaultLighting = true
+    }
+    
     func generateRoom(width:Float, height:Float, floorTextureName:String, wallTextureName:String) {
         
         //Floor
         let floor = SCNFloor()
-        floor.reflectivity = 0.05
+        floor.reflectivity = 0
         floor.firstMaterial?.diffuse.contents = floorTextureName
         floor.firstMaterial?.locksAmbientWithDiffuse = true
         floor.firstMaterial?.diffuse.wrapS = SCNWrapMode.Repeat;
@@ -104,7 +153,7 @@ class ViewController: UIViewController {
         floorNode.physicsBody = SCNPhysicsBody.staticBody()
         scene.rootNode.addChildNode(floorNode)
 
-        //Walls
+        //Walls and Ceil
         let halfWidth:Float = width / 2
         let halfHeight:Float = height / 2
         let wallTextureImage:UIImage = UIImage(named: wallTextureName)!
@@ -117,26 +166,104 @@ class ViewController: UIViewController {
         wall.firstMaterial?.diffuse.wrapS = SCNWrapMode.Repeat
         wall.firstMaterial?.diffuse.wrapT = SCNWrapMode.Mirror
         wall.firstMaterial?.doubleSided = false
-        wall.firstMaterial?.locksAmbientWithDiffuse = false
+        wall.firstMaterial?.shininess = 0.0
         
         var wallNode = SCNNode(geometry: wall)
-        wallNode.position = SCNVector3Make(0, halfHeight, -halfWidth);
+        wallNode.position = SCNVector3Make(0, halfHeight, -halfWidth)
+        wallNode.physicsBody = SCNPhysicsBody.staticBody()
         scene.rootNode.addChildNode(wallNode)
         
         wallNode = wallNode.clone()
-        wallNode.position = SCNVector3Make(-halfWidth, halfHeight, 0);
-        wallNode.rotation = SCNVector4Make(0, 1, 0, Float(M_PI_2));
+        wallNode.position = SCNVector3Make(-halfWidth, halfHeight, 0)
+        wallNode.rotation = SCNVector4Make(0, 1, 0, Float(M_PI_2))
         scene.rootNode.addChildNode(wallNode)
         
         wallNode = wallNode.clone()
-        wallNode.position = SCNVector3Make(halfWidth, halfHeight, 0);
-        wallNode.rotation = SCNVector4Make(0, 1, 0, Float(-M_PI_2));
+        wallNode.position = SCNVector3Make(halfWidth, halfHeight, 0)
+        wallNode.rotation = SCNVector4Make(0, 1, 0, Float(-M_PI_2))
         scene.rootNode.addChildNode(wallNode)
         
         wallNode = wallNode.clone()
-        wallNode.position = SCNVector3Make(0, halfHeight, halfWidth);
-        wallNode.rotation = SCNVector4Make(0, 1, 0, Float(M_PI));
+        wallNode.position = SCNVector3Make(0, halfHeight, halfWidth)
+        wallNode.rotation = SCNVector4Make(0, 1, 0, Float(M_PI))
         scene.rootNode.addChildNode(wallNode)
+
+        let ceilNode = SCNNode(geometry: SCNPlane(width: CGFloat(width), height: CGFloat(width)))
+        ceilNode.geometry?.firstMaterial?.diffuse.contents = UIColor(white: 22, alpha: 1)
+        ceilNode.position = SCNVector3Make(0, height, 0)
+        ceilNode.rotation = SCNVector4Make(1, 0, 0, Float(M_PI_2))
+
+        scene.rootNode.addChildNode(ceilNode)
+    }
+    
+
+    
+    func addModels(modelList: [ModelInformation], radius:Float ) {
+//
+        let spotlight = SCNLight()
+        spotlight.type = SCNLightTypeSpot
+        spotlight.color = UIColor(white: 1.0, alpha: 1.0)
+        spotlight.castsShadow = false;
+//        spotlight.shadowColor = UIColor(white: 0.1, alpha: 0.5)
+        spotlight.zNear = 30
+        spotlight.zFar = CGFloat(roomHeight) + 10
+        spotlight.shadowRadius = 1.0
+        spotlight.spotInnerAngle = 20
+        spotlight.spotOuterAngle = 45
+        
+        let cnt = modelList.count
+        let angleStep = 2 * M_PI / Double(cnt)
+        var curAngle:Double = 0
+        
+        for model in modelList {
+            
+            let curX:Float = Float(sin(curAngle)) * radius
+            let curZ:Float = Float(cos(curAngle)) * radius
+            
+            let node = SCNNode()
+            let loadedScene = SCNScene(named: model.filename)
+            let modelNode = loadedScene!.rootNode.childNodes[0]
+            print(loadedScene!.rootNode)
+            modelNode.scale = model.scale
+
+            let spotlightNode = SCNNode()
+            spotlightNode.light = spotlight
+            spotlightNode.rotation = SCNVector4Make(1, 0, 0, Float(-M_PI_2));
+            spotlightNode.position = SCNVector3Make(0, roomHeight, 0)
+
+            print(curX, curZ, curAngle)
+            
+            node.addChildNode(modelNode)
+            node.addChildNode(spotlightNode)
+            node.position = SCNVector3Make(curX, 0, -curZ)
+            node.rotation = SCNVector4Make(0, 1, 0, -Float(curAngle))
+
+            scene.rootNode.addChildNode(node)
+            curAngle += angleStep
+        }
+                
+    }
+    
+    func addLights() {
+        let lightNode = SCNNode()
+        lightNode.light = SCNLight()
+        lightNode.light?.type = SCNLightTypeSpot
+//        lightNode.light?.type = SCNLightTypeOmni
+        lightNode.rotation = SCNVector4Make(1, 0, 0, Float(-M_PI_2));
+        lightNode.position = SCNVector3Make(0, roomHeight, 0)
+        lightNode.light?.color = UIColor(white: 1.0, alpha: 0.6)
+        lightNode.light?.castsShadow = false;
+//        lightNode.light?.shadowColor = UIColor(white: 0.5, alpha: 0.1)
+        lightNode.light?.spotInnerAngle = 120
+        lightNode.light?.spotOuterAngle = 180
+        lightNode.light?.zNear = 30;
+        lightNode.light?.zFar = 800;
+        lightNode.light?.attenuationStartDistance = 100
+        lightNode.light?.attenuationEndDistance = 800
+        lightNode.light?.attenuationFalloffExponent = 1.0
+
+        scene.rootNode.addChildNode(lightNode)
+
     }
     
     override func didReceiveMemoryWarning() {

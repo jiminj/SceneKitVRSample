@@ -8,66 +8,47 @@
 
 import UIKit
 import SceneKit
-
+import simd
 
 class VRCameraController {
     
     var camera : VRCamera
     var maxFOV:Float = Float(M_PI_4)
-    var cameraInitPos:SCNVector3 = SCNVector3()
-    var cameraLastPos:SCNVector3 = SCNVector3()
-    var cameraInitAng:SCNVector3 = SCNVector3()
-    var cameraLastAng:SCNVector3 = SCNVector3()
-    
+
     init(camera:VRCamera) {
         self.camera = camera
     }
     
-    func actionBegin(){
-        cameraInitAng = camera.eulerAngles
-        cameraInitPos = camera.position
+    func tilt(let tiltInc:vector_float3, speed:Float = 1, inverted:Bool = true) {
+        
+        let sign:Float = inverted ? 1.0 : -1.0
+        let newCameraAng = vector_float3(camera.eulerAngles) + sign * tiltInc * speed
+        
+        if(vector_length(newCameraAng) < maxFOV)
+        {
+            camera.eulerAngles = SCNVector3( newCameraAng )
+        }
     }
     
-    func tilt(let tiltVec:vector_float2, inverted:Bool = false) {
+    func moveOnXZPlane(let moveInc:vector_float2, speed:Float = 1, inverted:Bool = true) {
         
-        let newCameraAngY = cameraInitAng.y + Float(tiltVec.x) * 0.005
-        var newCameraAngX = cameraInitAng.x + Float(tiltVec.y) * 0.005
-        if(abs(newCameraAngX) > Float(M_PI_4)) { newCameraAngX = cameraLastAng.x }
-
-        camera.eulerAngles.x = newCameraAngX
-        camera.eulerAngles.y = newCameraAngY
-
-        cameraLastAng = camera.eulerAngles
+        let sign:Float = inverted ? -1.0 : 1.0
         
-//        
-//        let invertedTiltVec = vector2(tiltVec.y, tiltVec.x)
-//        let lastCamerAng = vector2(cam.eulerAngles.x, cam.eulerAngles.y)
-//        let newCameraAng = lastCamerAng + (inverted ? invertedTiltVec : tiltVec)
-//        print(tiltVec, newCameraAng, inverted)
-//        
-//        if(vector_length(newCameraAng) <= maxFOV)
-//        {
-//            cam.eulerAngles.x = newCameraAng.x
-//            cam.eulerAngles.y = newCameraAng.y
-//        }
-    }
-    
-    func move(let moveVec:vector_float2, inverted:Bool = false) {
-        
-
-
         let cosAngY = cos(camera.eulerAngles.y)
         let sinAngY = sin(camera.eulerAngles.y)
-        var newCameraPosX = cameraInitPos.x - moveVec.x * cosAngY - moveVec.y * sinAngY
-        var newCameraPosZ = cameraInitPos.z + moveVec.x * sinAngY - moveVec.y * cosAngY
+        let rotationMatrix:float2x2 = float2x2(rows: [float2(cosAngY, sinAngY), float2(-sinAngY, cosAngY)] )
+        var cameraMovement:vector_float2 = rotationMatrix * moveInc * speed
+        cameraMovement *= sign
 
+// TODO: collision detection
+        
 //        if(abs(newCameraPosX) > roomBoundaryAbs) { newCameraPosX = cameraLastPos.x }
 //        if(abs(newCameraPosZ) > roomBoundaryAbs) { newCameraPosZ = cameraLastPos.z }
 
-        camera.position.x = newCameraPosX
-        camera.position.z = newCameraPosZ
+        camera.position.x = camera.position.x + cameraMovement.x
+        camera.position.z = camera.position.z + cameraMovement.y
+
         
-        cameraLastPos = camera.position
     }
     
 }

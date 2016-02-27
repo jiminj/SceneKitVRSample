@@ -88,16 +88,26 @@ class ViewController: UIViewController {
 
     }
     
+    
+    var lastTiltIncrement:vector_float3 = vector_float3(0, 0, 0)
+    var lastMoveIncrement:vector_float2 = vector_float2(0, 0)
+    let tiltSpeed:Float = 0.005
+    let moveSpeed:Float = 1.0
+    
+    func resetCameraIncrement() {
+        lastTiltIncrement = vector_float3(0, 0, 0)
+        lastMoveIncrement = vector_float2(0, 0)
+    }
+    
     //temporal solution
-    var currentGestureNumberOfTouches = 0;
-
+    var currentGestureNumberOfTouches = 0
+    
+    
     func handlePan(gestureRecognizer: UIPanGestureRecognizer) {
         if(gestureRecognizer.state == UIGestureRecognizerState.Began)
         {
-//            cameraInitAng = cameraNode.eulerAngles
-//            cameraInitPos = cameraNode.position
-            cameraController.actionBegin()
-            
+//            cameraController.reset()
+            resetCameraIncrement()
             currentGestureNumberOfTouches = gestureRecognizer.numberOfTouches()
             return
         }
@@ -118,15 +128,17 @@ class ViewController: UIViewController {
         }
     }
     
-    func tiltCamera(point:CGPoint, speed:Float=0.005) {
-        cameraController.tilt(vector_float2(Float(point.x), Float(point.y)), inverted: true)
-    }
-    
-    
     func moveCamera(point:CGPoint) {
-        cameraController.move(vector_float2(Float(point.x), Float(point.y)), inverted: true)
+        let currentMove = vector_float2(Float(point.x), Float(point.y))
+        cameraController.moveOnXZPlane(currentMove - lastMoveIncrement, speed:moveSpeed, inverted: true)
+        lastMoveIncrement = currentMove
     }
     
+    func tiltCamera(point:CGPoint) {
+        let currentTilt = vector_float3(Float(point.y), Float(point.x), 0)
+        cameraController.tilt((currentTilt - lastTiltIncrement), speed:tiltSpeed, inverted: true)
+        lastTiltIncrement = currentTilt
+    }
     
     func generateRoom(width:Float, height:Float, floorTextureName:String, wallTextureName:String) {
         

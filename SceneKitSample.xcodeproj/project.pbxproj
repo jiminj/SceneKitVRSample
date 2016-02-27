@@ -17,6 +17,7 @@
 		ECA8388B1C7740630096809D /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECA8388A1C7740620096809D /* SceneKit.framework */; };
 		ECA8388D1C7762E00096809D /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA8388C1C7762E00096809D /* SampleView.swift */; };
 		ECA838AD1C7967770096809D /* samples.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA838AC1C7967770096809D /* samples.scnassets */; };
+		ECAAFD3E1C81F23F00E936BF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAAFD3D1C81F23F00E936BF /* Extensions.swift */; };
 		ECCA9A401C818B8300C11C4B /* VRCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCA9A3F1C818B8300C11C4B /* VRCamera.swift */; };
 		ECCA9A411C818B8300C11C4B /* VRCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCA9A3F1C818B8300C11C4B /* VRCamera.swift */; };
 		ECCA9A421C818B8300C11C4B /* VRCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCA9A3F1C818B8300C11C4B /* VRCamera.swift */; };
@@ -56,6 +57,7 @@
 		ECA8388A1C7740620096809D /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		ECA8388C1C7762E00096809D /* SampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
 		ECA838AC1C7967770096809D /* samples.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = samples.scnassets; path = SceneKitSample/samples.scnassets; sourceTree = "<group>"; };
+		ECAAFD3D1C81F23F00E936BF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		ECCA9A3F1C818B8300C11C4B /* VRCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VRCamera.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 		EC6B01FA1C76DB91006BAD93 /* SceneKitSample */ = {
 			isa = PBXGroup;
 			children = (
+				ECAAFD3D1C81F23F00E936BF /* Extensions.swift */,
 				EC6B01FB1C76DB91006BAD93 /* AppDelegate.swift */,
 				EC6B01FD1C76DB91006BAD93 /* ViewController.swift */,
 				ECCA9A3F1C818B8300C11C4B /* VRCamera.swift */,
@@ -273,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECAAFD3E1C81F23F00E936BF /* Extensions.swift in Sources */,
 				EC6B01FE1C76DB91006BAD93 /* ViewController.swift in Sources */,
 				ECA8388D1C7762E00096809D /* SampleView.swift in Sources */,
 				ECCA9A401C818B8300C11C4B /* VRCamera.swift in Sources */,

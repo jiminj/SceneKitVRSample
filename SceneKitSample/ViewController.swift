@@ -21,10 +21,12 @@ class ModelInformation {
 
 class ViewController: UIViewController {
 
+    @IBOutlet var leftSceneView: SampleView!
+    @IBOutlet var rightSceneView: SampleView!
     var sampleView: SampleView { return self.view as! SampleView }
+    
     let scene = SCNScene()
     let cameraNode = SCNNode()
-
     
     var boundaryOffset:Float = 20
     var roomBoundaryAbs:Float = 280
@@ -44,9 +46,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         //initialize the scene
-        sampleView.scene = scene
-        sampleView.backgroundColor = UIColor.whiteColor()
-        sampleView.showsStatistics = true
+//        sampleView.scene = scene
+//        sampleView.backgroundColor = UIColor.whiteColor()
+//        sampleView.showsStatistics = true
+        
+
+        leftSceneView.backgroundColor = UIColor.blackColor()
+        rightSceneView.backgroundColor = UIColor.blackColor()
+        leftSceneView.showsStatistics = true
+        rightSceneView.showsStatistics = true
+        leftSceneView.scene = scene
+        rightSceneView.scene = scene
+        
         roomWidth = 600
         roomHeight = 200
         
@@ -57,16 +68,16 @@ class ViewController: UIViewController {
         setupEnvironment()
         generateRoom(roomWidth, height: roomHeight, floorTextureName: "samples.scnassets/wood.png", wallTextureName: "samples.scnassets/wall.jpg")
         addLights()
-        
-        let Models:[ModelInformation] = [
-            ModelInformation(filename: "samples.scnassets/Writing_Desk.scn", scale: SCNVector3Make(1.0, 1.0, 1.0)),
-            ModelInformation(filename: "samples.scnassets/Wood_Table.dae", scale: SCNVector3Make(100.0, 100.0, 100.0)),
-            ModelInformation(filename: "samples.scnassets/cat.scn", scale: SCNVector3Make(50.0, 50.0, 50.0)),
-            ModelInformation(filename: "samples.scnassets/Wooden_Chair.scn", scale: SCNVector3Make(50.0, 50.0, 50.0)),
-            ModelInformation(filename: "samples.scnassets/Ambulance.scn", scale: SCNVector3Make(0.2, 0.2, 0.2))
-        ]
-        
-        addModels(Models, radius:200)
+//
+//        let Models:[ModelInformation] = [
+//            ModelInformation(filename: "samples.scnassets/Writing_Desk.scn", scale: SCNVector3Make(1.0, 1.0, 1.0)),
+//            ModelInformation(filename: "samples.scnassets/Wood_Table.dae", scale: SCNVector3Make(100.0, 100.0, 100.0)),
+//            ModelInformation(filename: "samples.scnassets/cat.scn", scale: SCNVector3Make(50.0, 50.0, 50.0)),
+//            ModelInformation(filename: "samples.scnassets/Wooden_Chair.scn", scale: SCNVector3Make(50.0, 50.0, 50.0)),
+//            ModelInformation(filename: "samples.scnassets/Ambulance.scn", scale: SCNVector3Make(0.2, 0.2, 0.2))
+//        ]
+////
+//        addModels(Models, radius:200)
 
     }
     

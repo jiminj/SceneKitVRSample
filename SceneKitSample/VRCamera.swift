@@ -13,7 +13,7 @@ import simd
 class VRCameraController {
     
     var camera : VRCamera
-    var maxFOV:Float = Float(M_PI_4)
+    var maxFOV:Float = Float(M_PI_2)
 
     init(camera:VRCamera) {
         self.camera = camera
@@ -65,10 +65,15 @@ class VRCamera: SCNNode {
         }
     }
     
-    override init() {
-        interpupilaryDistance = 0
-        
+    convenience override init() {
+        self.init(interpupilaryDistance: 6.0)
+
+    }
+    
+    init(interpupilaryDistance:Float)
+    {
         super.init()
+        
         left.camera = SCNCamera()
         left.name = "Left"
         self.addChildNode(left);
@@ -76,11 +81,10 @@ class VRCamera: SCNNode {
         right.camera = SCNCamera()
         right.name = "Right"
         self.addChildNode(right);
-        
-        { self.interpupilaryDistance = 20.0 }()
-        
-    }
     
+        
+        { self.interpupilaryDistance = interpupilaryDistance } ()
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

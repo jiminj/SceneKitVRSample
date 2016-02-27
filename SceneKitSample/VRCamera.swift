@@ -65,12 +65,7 @@ class VRCamera: SCNNode {
         }
     }
     
-    convenience override init() {
-        self.init(interpupilaryDistance: 6.0)
-
-    }
-    
-    init(interpupilaryDistance:Float)
+    init(interpupilaryDistance:Float = 6.0)
     {
         super.init()
         

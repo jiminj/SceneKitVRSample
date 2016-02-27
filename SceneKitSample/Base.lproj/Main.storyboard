@@ -59,7 +59,7 @@
                     </view>
                     <connections>
                         <outlet property="leftSceneView" destination="Khw-E4-cpD" id="dQX-P4-dnt"/>
-                        <outlet property="rightSceneView" destination="oK8-Rf-zxo" id="KbW-xQ-e3R"/>
+                        <outlet property="rightSceneView" destination="oK8-Rf-zxo" id="di4-NM-7t5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -13,7 +13,7 @@ import simd
 class VRCameraController {
     
     var camera : VRCamera
-    var maxFOV:Float = Float(M_PI_2)
+//    var maxFOV:Float = Float(M_PI)
 
     init(camera:VRCamera) {
         self.camera = camera
@@ -23,11 +23,12 @@ class VRCameraController {
         
         let sign:Float = inverted ? 1.0 : -1.0
         let newCameraAng = vector_float3(camera.eulerAngles) + sign * tiltInc * speed
-        
-        if(vector_length(newCameraAng) < maxFOV)
-        {
-            camera.eulerAngles = SCNVector3( newCameraAng )
-        }
+        camera.eulerAngles = SCNVector3( newCameraAng )
+
+//        if(vector_length(newCameraAng) < maxFOV)
+//        {
+//            camera.eulerAngles = SCNVector3( newCameraAng )
+//        }
     }
     
     func moveOnXZPlane(let moveInc:vector_float2, speed:Float = 1, inverted:Bool = true) {

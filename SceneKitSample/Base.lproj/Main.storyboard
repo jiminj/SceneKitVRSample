@@ -16,11 +16,55 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="SampleView" customModule="SceneKitSample" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oK8-Rf-zxo">
+                                <rect key="frame" x="300" y="0.0" width="300" height="600"/>
+                                <variation key="heightClass=compact" misplaced="YES">
+                                    <rect key="frame" x="297" y="0.0" width="303" height="400"/>
+                                </variation>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="97" y="0.0" width="303" height="600"/>
+                                </variation>
+                                <variation key="widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="497" y="0.0" width="303" height="600"/>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="97" y="0.0" width="303" height="400"/>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="497" y="0.0" width="303" height="400"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="97" y="0.0" width="303" height="800"/>
+                                </variation>
+                            </sceneKitView>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Khw-E4-cpD">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
+                                <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+                                </variation>
+                            </sceneKitView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Khw-E4-cpD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="1lX-94-gq2"/>
+                            <constraint firstItem="oK8-Rf-zxo" firstAttribute="top" secondItem="Khw-E4-cpD" secondAttribute="top" id="3Mk-iP-7sA"/>
+                            <constraint firstItem="oK8-Rf-zxo" firstAttribute="width" secondItem="Khw-E4-cpD" secondAttribute="width" id="6cM-Qt-fme"/>
+                            <constraint firstItem="oK8-Rf-zxo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="M7o-Fo-WA5"/>
+                            <constraint firstAttribute="trailing" secondItem="oK8-Rf-zxo" secondAttribute="trailing" id="SiO-2C-HGg"/>
+                            <constraint firstItem="Khw-E4-cpD" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="WiF-ft-Qcu"/>
+                            <constraint firstItem="oK8-Rf-zxo" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Ygt-Ze-8Pm"/>
+                            <constraint firstItem="oK8-Rf-zxo" firstAttribute="leading" secondItem="Khw-E4-cpD" secondAttribute="trailing" id="ZBw-sd-cHK"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="leftSceneView" destination="Khw-E4-cpD" id="dQX-P4-dnt"/>
+                        <outlet property="rightSceneView" destination="oK8-Rf-zxo" id="di4-NM-7t5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="491" y="376"/>
         </scene>
     </scenes>
 </document>

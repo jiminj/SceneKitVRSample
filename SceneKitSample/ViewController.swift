@@ -21,10 +21,15 @@ class ModelInformation {
 
 class ViewController: UIViewController {
 
+    @IBOutlet var leftSceneView: SampleView!
+    @IBOutlet var rightSceneView: SampleView!
+    
     var sampleView: SampleView { return self.view as! SampleView }
+    
     let scene = SCNScene()
-    let cameraNode = SCNNode()
-
+//    let cameraNode = SCNNode()
+    let cameraNode = VRCamera()
+    var cameraController:VRCameraController
     
     var boundaryOffset:Float = 20
     var roomBoundaryAbs:Float = 280
@@ -35,49 +40,74 @@ class ViewController: UIViewController {
     }
     var roomHeight:Float = 200
     
-    var cameraInitPos:SCNVector3 = SCNVector3()
-    var cameraLastPos:SCNVector3 = SCNVector3()
-    var cameraInitAng:SCNVector3 = SCNVector3()
-    var cameraLastAng:SCNVector3 = SCNVector3()
+    
+    required init(coder aDecoder: NSCoder) {
+        cameraController = VRCameraController(camera: cameraNode)
+        super.init(coder: aDecoder)!
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //initialize the scene
-        sampleView.scene = scene
-        sampleView.backgroundColor = UIColor.whiteColor()
-        sampleView.showsStatistics = true
+        leftSceneView.backgroundColor = UIColor.blackColor()
+        rightSceneView.backgroundColor = UIColor.blackColor()
+        leftSceneView.showsStatistics = true
+        rightSceneView.showsStatistics = true
+        leftSceneView.scene = scene
+        rightSceneView.scene = scene
+        
+        
+        cameraNode.position = SCNVector3(x: 0, y: 100, z: 0)
+        cameraNode.left.camera?.automaticallyAdjustsZRange = true
+        cameraNode.right.camera?.automaticallyAdjustsZRange = true
+        scene.rootNode.addChildNode(cameraNode)
+        
+        
+        leftSceneView.pointOfView = cameraNode.left
+        rightSceneView.pointOfView = cameraNode.right
+        
         roomWidth = 600
         roomHeight = 200
         
         //add gesture control
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
-        self.view.addGestureRecognizer(panGestureRecognizer)
+        view.addGestureRecognizer(panGestureRecognizer)
         
-        setupEnvironment()
         generateRoom(roomWidth, height: roomHeight, floorTextureName: "samples.scnassets/wood.png", wallTextureName: "samples.scnassets/wall.jpg")
         addLights()
-        
-        let Models:[ModelInformation] = [
-            ModelInformation(filename: "samples.scnassets/Writing_Desk.scn", scale: SCNVector3Make(1.0, 1.0, 1.0)),
-            ModelInformation(filename: "samples.scnassets/Wood_Table.dae", scale: SCNVector3Make(100.0, 100.0, 100.0)),
-            ModelInformation(filename: "samples.scnassets/cat.scn", scale: SCNVector3Make(50.0, 50.0, 50.0)),
-            ModelInformation(filename: "samples.scnassets/Wooden_Chair.scn", scale: SCNVector3Make(50.0, 50.0, 50.0)),
-            ModelInformation(filename: "samples.scnassets/Ambulance.scn", scale: SCNVector3Make(0.2, 0.2, 0.2))
-        ]
-        
-        addModels(Models, radius:200)
+//
+//        let Models:[ModelInformation] = [
+//            ModelInformation(filename: "samples.scnassets/Writing_Desk.scn", scale: SCNVector3Make(1.0, 1.0, 1.0)),
+//            ModelInformation(filename: "samples.scnassets/Wood_Table.dae", scale: SCNVector3Make(100.0, 100.0, 100.0)),
+//            ModelInformation(filename: "samples.scnassets/cat.scn", scale: SCNVector3Make(50.0, 50.0, 50.0)),
+//            ModelInformation(filename: "samples.scnassets/Wooden_Chair.scn", scale: SCNVector3Make(50.0, 50.0, 50.0)),
+//            ModelInformation(filename: "samples.scnassets/Ambulance.scn", scale: SCNVector3Make(0.2, 0.2, 0.2))
+//        ]
+////
+//        addModels(Models, radius:200)
 
     }
     
+    
+    var lastTiltIncrement:vector_float3 = vector_float3(0, 0, 0)
+    var lastMoveIncrement:vector_float2 = vector_float2(0, 0)
+    let tiltSpeed:Float = 0.005
+    let moveSpeed:Float = 1.0
+    
+    func resetCameraIncrement() {
+        lastTiltIncrement = vector_float3(0, 0, 0)
+        lastMoveIncrement = vector_float2(0, 0)
+    }
+    
     //temporal solution
-    var currentGestureNumberOfTouches = 0;
-
+    var currentGestureNumberOfTouches = 0
+    
+    
     func handlePan(gestureRecognizer: UIPanGestureRecognizer) {
         if(gestureRecognizer.state == UIGestureRecognizerState.Began)
         {
-            cameraInitAng = cameraNode.eulerAngles
-            cameraInitPos = cameraNode.position
+//            cameraController.reset()
+            resetCameraIncrement()
             currentGestureNumberOfTouches = gestureRecognizer.numberOfTouches()
             return
         }
@@ -98,44 +128,16 @@ class ViewController: UIViewController {
         }
     }
     
-    func tiltCamera(point:CGPoint) {
-        let newCameraAngY = cameraInitAng.y + Float(point.x) * 0.005
-        var newCameraAngX = cameraInitAng.x + Float(point.y) * 0.005
-        if(abs(newCameraAngX) > Float(M_PI_4)) { newCameraAngX = cameraLastAng.x }
-        
-        cameraNode.eulerAngles.x = newCameraAngX
-        cameraNode.eulerAngles.y = newCameraAngY
-        
-        cameraLastAng = cameraNode.eulerAngles
-    }
-    
-    
     func moveCamera(point:CGPoint) {
-        let cosAngY = cos(cameraNode.eulerAngles.y)
-        let sinAngY = sin(cameraNode.eulerAngles.y)
-        var newCameraPosX = cameraInitPos.x - Float(point.x) * cosAngY - Float(point.y) * sinAngY
-        var newCameraPosZ = cameraInitPos.z + Float(point.x) * sinAngY - Float(point.y) * cosAngY
-
-        if(abs(newCameraPosX) > roomBoundaryAbs) { newCameraPosX = cameraLastPos.x }
-        if(abs(newCameraPosZ) > roomBoundaryAbs) { newCameraPosZ = cameraLastPos.z }
-        
-        cameraNode.position.x = newCameraPosX
-        cameraNode.position.z = newCameraPosZ
-
-        cameraLastPos = cameraNode.position
+        let currentMove = vector_float2(Float(point.x), Float(point.y))
+        cameraController.moveOnXZPlane(currentMove - lastMoveIncrement, speed:moveSpeed, inverted: true)
+        lastMoveIncrement = currentMove
     }
     
-
-    func setupEnvironment() {
-//        sampleView.allowsCameraControl = true
-
-        //camera
-        let camera = SCNCamera()
-        camera.automaticallyAdjustsZRange = true
-        cameraNode.position = SCNVector3(x: 0, y: 100, z: 0)
-        cameraNode.camera = camera
-        scene.rootNode.addChildNode(cameraNode)
-//        sampleView.autoenablesDefaultLighting = true
+    func tiltCamera(point:CGPoint) {
+        let currentTilt = vector_float3(Float(point.y), Float(point.x), 0)
+        cameraController.tilt((currentTilt - lastTiltIncrement), speed:tiltSpeed, inverted: true)
+        lastTiltIncrement = currentTilt
     }
     
     func generateRoom(width:Float, height:Float, floorTextureName:String, wallTextureName:String) {

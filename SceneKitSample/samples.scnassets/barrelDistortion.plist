@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>passes</key>
+	<dict>
+		<key>barrelDistortion</key>
+		<dict>
+			<key>draw</key>
+			<string>DRAW_QUAD</string>
+			<key>program</key>
+			<string>samples.scnassets/barrelDistortion</string>
+			<key>inputs</key>
+			<dict>
+				<key>barrelPower</key>
+				<string>barrelPower-symbol</string>
+				<key>colorSampler</key>
+				<dict>
+					<key>target</key>
+					<string>COLOR</string>
+					<key>wrapS</key>
+					<string>clamp</string>
+					<key>wrapT</key>
+					<string>clamp</string>
+					<key>wrapP</key>
+					<string>clamp</string>
+				</dict>
+				<key>a_position</key>
+				<string>a_position-symbol</string>
+			</dict>
+			<key>outputs</key>
+			<dict>
+				<key>color</key>
+				<string>COLOR</string>
+			</dict>
+		</dict>
+	</dict>
+	<key>sequence</key>
+	<array>
+		<string>barrelDistortion</string>
+	</array>
+	<key>symbols</key>
+	<dict>
+		<key>a_position-symbol</key>
+		<dict>
+			<key>semantic</key>
+			<string>vertex</string>
+		</dict>
+		<key>barrelPower-symbol</key>
+		<dict>
+			<key>type</key>
+			<string>float</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

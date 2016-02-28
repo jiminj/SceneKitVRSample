@@ -54,10 +54,29 @@ class VRCameraController {
     
 }
 
+
+class TechniqueLoader {
+    static func LoadFromJson(path:String) -> SCNTechnique {
+        var technique = SCNTechnique()
+        let data = NSData(contentsOfFile: path)
+        do {
+            let dict = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers)
+            technique = SCNTechnique(dictionary: dict as! Dictionary)!
+            
+        } catch let error as NSError {
+            print("json error: \(error.localizedDescription)")
+        }
+        return technique
+    }
+
+}
+
+
 class VRCamera: SCNNode {
     
     let left : SCNNode = SCNNode()
     let right : SCNNode = SCNNode()
+    let barrel_shader = SCNTechnique()
     var interpupilaryDistance:Float = 0 {
         willSet
         {
@@ -66,8 +85,7 @@ class VRCamera: SCNNode {
         }
     }
     
-    init(interpupilaryDistance:Float = 6.0)
-    {
+    init(interpupilaryDistance:Float = 6.0) {
         super.init()
         
         left.camera = SCNCamera()
@@ -80,6 +98,20 @@ class VRCamera: SCNNode {
     
         
         { self.interpupilaryDistance = interpupilaryDistance } ()
+        
+        setupBarrelShader()
+ 
+
+    }
+    
+    func setupBarrelShader() {
+        
+        let path = NSBundle.mainBundle().URLForResource("samples.scnassets/barrelDistortion", withExtension: "plist")
+        let dic = NSDictionary(contentsOfURL: path!)
+        let technique = SCNTechnique(dictionary: dic as! Dictionary)
+        
+        left.camera?.technique = technique
+        right.camera?.technique = technique
     }
     
     required init?(coder aDecoder: NSCoder) {

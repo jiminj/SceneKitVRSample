@@ -19,8 +19,6 @@
 		ECA838AD1C7967770096809D /* samples.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA838AC1C7967770096809D /* samples.scnassets */; };
 		ECAAFD3E1C81F23F00E936BF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAAFD3D1C81F23F00E936BF /* Extensions.swift */; };
 		ECCA9A401C818B8300C11C4B /* VRCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCA9A3F1C818B8300C11C4B /* VRCamera.swift */; };
-		ECCA9A411C818B8300C11C4B /* VRCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCA9A3F1C818B8300C11C4B /* VRCamera.swift */; };
-		ECCA9A421C818B8300C11C4B /* VRCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCA9A3F1C818B8300C11C4B /* VRCamera.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -288,7 +286,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECCA9A411C818B8300C11C4B /* VRCamera.swift in Sources */,
 				EC6B02111C76DB91006BAD93 /* SceneKitSampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,7 +294,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECCA9A421C818B8300C11C4B /* VRCamera.swift in Sources */,
 				EC6B021C1C76DB91006BAD93 /* SceneKitSampleUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

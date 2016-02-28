@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oK8-Rf-zxo">
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preferredRenderingAPI="2" translatesAutoresizingMaskIntoConstraints="NO" id="oK8-Rf-zxo">
                                 <rect key="frame" x="300" y="0.0" width="300" height="600"/>
                                 <variation key="heightClass=compact" misplaced="YES">
                                     <rect key="frame" x="297" y="0.0" width="303" height="400"/>
@@ -38,7 +38,7 @@
                                     <rect key="frame" x="97" y="0.0" width="303" height="800"/>
                                 </variation>
                             </sceneKitView>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Khw-E4-cpD">
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preferredRenderingAPI="2" translatesAutoresizingMaskIntoConstraints="NO" id="Khw-E4-cpD">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
                                 <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
@@ -58,7 +58,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="leftSceneView" destination="Khw-E4-cpD" id="dQX-P4-dnt"/>
+                        <outlet property="leftSceneView" destination="Khw-E4-cpD" id="4yJ-YG-4AL"/>
                         <outlet property="rightSceneView" destination="oK8-Rf-zxo" id="di4-NM-7t5"/>
                     </connections>
                 </viewController>

@@ -10,23 +10,13 @@ import UIKit
 import SceneKit
 import SceneKit.ModelIO
 
-class ModelInformation {
-    var filename:String
-    var scale:SCNVector3
-    init(filename:String, scale:SCNVector3) {
-        self.filename = filename
-        self.scale = scale
-    }
-}
 
 class ViewController: UIViewController {
 
-    @IBOutlet var leftSceneView: SampleView!
-    @IBOutlet var rightSceneView: SampleView!
+    @IBOutlet var leftSceneView: SCNView!
+    @IBOutlet var rightSceneView: SCNView!
     
-    var sampleView: SampleView { return self.view as! SampleView }
-    
-    let scene = SCNScene()
+    let scene = SampleScene(width:1000)
 //    let cameraNode = SCNNode()
     let cameraNode = VRCamera()
     var cameraController:VRCameraController
@@ -40,74 +30,85 @@ class ViewController: UIViewController {
     }
     var roomHeight:Float = 200
     
-    
     required init(coder aDecoder: NSCoder) {
+        
         cameraController = VRCameraController(camera: cameraNode)
         super.init(coder: aDecoder)!
+    
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
 
+        super.viewDidLoad()
+        
         leftSceneView.backgroundColor = UIColor.blackColor()
         rightSceneView.backgroundColor = UIColor.blackColor()
         leftSceneView.showsStatistics = true
         rightSceneView.showsStatistics = true
+        
+        let Models:[ModelInformation] = [
+            ModelInformation(filename: "samples.scnassets/Writing_Desk.scn", scale: SCNVector3Make(1.0, 1.0, 1.0), rotation: SCNVector4(0,0,0,0)),
+            ModelInformation(filename: "samples.scnassets/Wood_Table.scn", scale: SCNVector3Make(100.0, 100.0, 100.0), rotation: SCNVector4(1, 0, 0, -Float(M_PI_2))),
+            ModelInformation(filename: "samples.scnassets/cat.scn", scale: SCNVector3Make(70.0, 70.0, 70.0), rotation: SCNVector4(0,0,0,0)),
+            ModelInformation(filename: "samples.scnassets/Wooden_Chair.scn", scale: SCNVector3Make(50.0, 50.0, 50.0), rotation: SCNVector4(0,0,0,0)),
+            ModelInformation(filename: "samples.scnassets/Ambulance.scn", scale: SCNVector3Make(0.2, 0.2, 0.2), rotation: SCNVector4(0,1,0, Float(M_PI)))
+        ]
+        
+        arrangeModelsOnScene(Models, radius:300)
+        
         leftSceneView.scene = scene
         rightSceneView.scene = scene
         
-        
-        cameraNode.position = SCNVector3(x: 0, y: 100, z: 0)
+        //Setup Camera
+        cameraNode.position = SCNVector3(x: 0, y: 150, z: 0)
         cameraNode.left.camera?.automaticallyAdjustsZRange = true
         cameraNode.right.camera?.automaticallyAdjustsZRange = true
         scene.rootNode.addChildNode(cameraNode)
         
-        
         leftSceneView.pointOfView = cameraNode.left
         rightSceneView.pointOfView = cameraNode.right
         
-        roomWidth = 600
-        roomHeight = 200
         
-        //add gesture control
+        //Add Gesture Control
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
         view.addGestureRecognizer(panGestureRecognizer)
         
-        generateRoom(roomWidth, height: roomHeight, floorTextureName: "samples.scnassets/wood.png", wallTextureName: "samples.scnassets/wall.jpg")
-        addLights()
-//
-//        let Models:[ModelInformation] = [
-//            ModelInformation(filename: "samples.scnassets/Writing_Desk.scn", scale: SCNVector3Make(1.0, 1.0, 1.0)),
-//            ModelInformation(filename: "samples.scnassets/Wood_Table.dae", scale: SCNVector3Make(100.0, 100.0, 100.0)),
-//            ModelInformation(filename: "samples.scnassets/cat.scn", scale: SCNVector3Make(50.0, 50.0, 50.0)),
-//            ModelInformation(filename: "samples.scnassets/Wooden_Chair.scn", scale: SCNVector3Make(50.0, 50.0, 50.0)),
-//            ModelInformation(filename: "samples.scnassets/Ambulance.scn", scale: SCNVector3Make(0.2, 0.2, 0.2))
-//        ]
-////
-//        addModels(Models, radius:200)
-
     }
     
     
-    var lastTiltIncrement:vector_float3 = vector_float3(0, 0, 0)
-    var lastMoveIncrement:vector_float2 = vector_float2(0, 0)
+    func arrangeModelsOnScene(modelList: [ModelInformation], radius:Float ) {
+        
+        let cnt = modelList.count
+        let angleStep = 2 * M_PI / Double(cnt)
+        var curAngle:Double = 0
+        
+        for model in modelList {
+            
+            let curX:Float = Float(sin(curAngle)) * radius
+            let curZ:Float = Float(cos(curAngle)) * radius
+            
+            scene.addModel( model,
+                position: SCNVector3Make(curX, 0, -curZ),
+                rotation:SCNVector4Make(0, 1, 0, -Float(curAngle)),
+                spotlight: true )
+            
+            curAngle += angleStep
+        }
+    }
+    
+
+    
+    var panAccumulation:vector_float3 = vector_float3(0,0,0)
     let tiltSpeed:Float = 0.005
     let moveSpeed:Float = 1.0
-    
-    func resetCameraIncrement() {
-        lastTiltIncrement = vector_float3(0, 0, 0)
-        lastMoveIncrement = vector_float2(0, 0)
-    }
     
     //temporal solution
     var currentGestureNumberOfTouches = 0
     
-    
     func handlePan(gestureRecognizer: UIPanGestureRecognizer) {
         if(gestureRecognizer.state == UIGestureRecognizerState.Began)
         {
-//            cameraController.reset()
-            resetCameraIncrement()
+            panAccumulation = vector_float3(0, 0, 0)
             currentGestureNumberOfTouches = gestureRecognizer.numberOfTouches()
             return
         }
@@ -128,144 +129,19 @@ class ViewController: UIViewController {
         }
     }
     
+    
     func moveCamera(point:CGPoint) {
-        let currentMove = vector_float2(Float(point.x), Float(point.y))
-        cameraController.moveOnXZPlane(currentMove - lastMoveIncrement, speed:moveSpeed, inverted: true)
-        lastMoveIncrement = currentMove
+        let curAccumulation = vector_float3(Float(point.x), Float(point.y), 0)
+        let diff = curAccumulation - panAccumulation
+        
+        cameraController.moveOnXZPlane(vector_float2(diff.x, diff.y), speed:moveSpeed, inverted: true)
+        panAccumulation = curAccumulation
     }
     
     func tiltCamera(point:CGPoint) {
-        let currentTilt = vector_float3(Float(point.y), Float(point.x), 0)
-        cameraController.tilt((currentTilt - lastTiltIncrement), speed:tiltSpeed, inverted: true)
-        lastTiltIncrement = currentTilt
-    }
-    
-    func generateRoom(width:Float, height:Float, floorTextureName:String, wallTextureName:String) {
-        
-        //Floor
-        let floor = SCNFloor()
-        floor.reflectivity = 0
-        floor.firstMaterial?.diffuse.contents = floorTextureName
-        floor.firstMaterial?.locksAmbientWithDiffuse = true
-        floor.firstMaterial?.diffuse.wrapS = SCNWrapMode.Repeat;
-        floor.firstMaterial?.diffuse.wrapT = SCNWrapMode.Repeat;
-        floor.firstMaterial?.diffuse.mipFilter = SCNFilterMode.Nearest;
-        floor.firstMaterial?.doubleSided = false
-        let floorNode = SCNNode(geometry: floor)
-        floorNode.physicsBody = SCNPhysicsBody.staticBody()
-        scene.rootNode.addChildNode(floorNode)
-
-        //Walls and Ceil
-        let halfWidth:Float = width / 2
-        let halfHeight:Float = height / 2
-        let wallTextureImage:UIImage = UIImage(named: wallTextureName)!
-        let wallTextureHeightScale:Float = height / Float(wallTextureImage.size.height)
-        let wallTextureWidthScale:Float = width / Float(wallTextureImage.size.width) / wallTextureHeightScale
-        
-        let wall = SCNPlane(width: CGFloat(width), height: CGFloat(height))
-        wall.firstMaterial?.diffuse.contents = wallTextureImage
-        wall.firstMaterial?.diffuse.contentsTransform = SCNMatrix4MakeScale(wallTextureWidthScale, 1, 1)
-        wall.firstMaterial?.diffuse.wrapS = SCNWrapMode.Repeat
-        wall.firstMaterial?.diffuse.wrapT = SCNWrapMode.Mirror
-        wall.firstMaterial?.doubleSided = false
-        wall.firstMaterial?.shininess = 0.0
-        
-        var wallNode = SCNNode(geometry: wall)
-        wallNode.position = SCNVector3Make(0, halfHeight, -halfWidth)
-        wallNode.physicsBody = SCNPhysicsBody.staticBody()
-        scene.rootNode.addChildNode(wallNode)
-        
-        wallNode = wallNode.clone()
-        wallNode.position = SCNVector3Make(-halfWidth, halfHeight, 0)
-        wallNode.rotation = SCNVector4Make(0, 1, 0, Float(M_PI_2))
-        scene.rootNode.addChildNode(wallNode)
-        
-        wallNode = wallNode.clone()
-        wallNode.position = SCNVector3Make(halfWidth, halfHeight, 0)
-        wallNode.rotation = SCNVector4Make(0, 1, 0, Float(-M_PI_2))
-        scene.rootNode.addChildNode(wallNode)
-        
-        wallNode = wallNode.clone()
-        wallNode.position = SCNVector3Make(0, halfHeight, halfWidth)
-        wallNode.rotation = SCNVector4Make(0, 1, 0, Float(M_PI))
-        scene.rootNode.addChildNode(wallNode)
-
-        let ceilNode = SCNNode(geometry: SCNPlane(width: CGFloat(width), height: CGFloat(width)))
-        ceilNode.geometry?.firstMaterial?.diffuse.contents = UIColor(white: 22, alpha: 1)
-        ceilNode.position = SCNVector3Make(0, height, 0)
-        ceilNode.rotation = SCNVector4Make(1, 0, 0, Float(M_PI_2))
-
-        scene.rootNode.addChildNode(ceilNode)
-    }
-    
-
-    
-    func addModels(modelList: [ModelInformation], radius:Float ) {
-//
-        let spotlight = SCNLight()
-        spotlight.type = SCNLightTypeSpot
-        spotlight.color = UIColor(white: 1.0, alpha: 1.0)
-        spotlight.castsShadow = false;
-//        spotlight.shadowColor = UIColor(white: 0.1, alpha: 0.5)
-        spotlight.zNear = 30
-        spotlight.zFar = CGFloat(roomHeight) + 10
-        spotlight.shadowRadius = 1.0
-        spotlight.spotInnerAngle = 20
-        spotlight.spotOuterAngle = 45
-        
-        let cnt = modelList.count
-        let angleStep = 2 * M_PI / Double(cnt)
-        var curAngle:Double = 0
-        
-        for model in modelList {
-            
-            let curX:Float = Float(sin(curAngle)) * radius
-            let curZ:Float = Float(cos(curAngle)) * radius
-            
-            let node = SCNNode()
-            let loadedScene = SCNScene(named: model.filename)
-            let modelNode = loadedScene!.rootNode.childNodes[0]
-            print(loadedScene!.rootNode)
-            modelNode.scale = model.scale
-
-            let spotlightNode = SCNNode()
-            spotlightNode.light = spotlight
-            spotlightNode.rotation = SCNVector4Make(1, 0, 0, Float(-M_PI_2));
-            spotlightNode.position = SCNVector3Make(0, roomHeight, 0)
-
-            print(curX, curZ, curAngle)
-            
-            node.addChildNode(modelNode)
-            node.addChildNode(spotlightNode)
-            node.position = SCNVector3Make(curX, 0, -curZ)
-            node.rotation = SCNVector4Make(0, 1, 0, -Float(curAngle))
-
-            scene.rootNode.addChildNode(node)
-            curAngle += angleStep
-        }
-                
-    }
-    
-    func addLights() {
-        let lightNode = SCNNode()
-        lightNode.light = SCNLight()
-        lightNode.light?.type = SCNLightTypeSpot
-//        lightNode.light?.type = SCNLightTypeOmni
-        lightNode.rotation = SCNVector4Make(1, 0, 0, Float(-M_PI_2));
-        lightNode.position = SCNVector3Make(0, roomHeight, 0)
-        lightNode.light?.color = UIColor(white: 1.0, alpha: 0.6)
-        lightNode.light?.castsShadow = false;
-//        lightNode.light?.shadowColor = UIColor(white: 0.5, alpha: 0.1)
-        lightNode.light?.spotInnerAngle = 120
-        lightNode.light?.spotOuterAngle = 180
-        lightNode.light?.zNear = 30;
-        lightNode.light?.zFar = 800;
-        lightNode.light?.attenuationStartDistance = 100
-        lightNode.light?.attenuationEndDistance = 800
-        lightNode.light?.attenuationFalloffExponent = 1.0
-
-        scene.rootNode.addChildNode(lightNode)
-
+        let curAccumulation = vector_float3(Float(point.y), Float(point.x), 0)
+        cameraController.tilt((curAccumulation - panAccumulation), speed:tiltSpeed, inverted: true)
+        panAccumulation = curAccumulation
     }
     
     override func didReceiveMemoryWarning() {

@@ -7,19 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC3D75C71C844AA400015ECE /* SceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3D75C61C844AA400015ECE /* SceneManager.swift */; };
-		EC3D75C91C846C7C00015ECE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3D75C81C846C7C00015ECE /* Utilities.swift */; };
-		EC6B01FC1C76DB91006BAD93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6B01FB1C76DB91006BAD93 /* AppDelegate.swift */; };
-		EC6B01FE1C76DB91006BAD93 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6B01FD1C76DB91006BAD93 /* ViewController.swift */; };
-		EC6B02011C76DB91006BAD93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC6B01FF1C76DB91006BAD93 /* Main.storyboard */; };
-		EC6B02031C76DB91006BAD93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC6B02021C76DB91006BAD93 /* Assets.xcassets */; };
-		EC6B02061C76DB91006BAD93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC6B02041C76DB91006BAD93 /* LaunchScreen.storyboard */; };
-		EC6B02111C76DB91006BAD93 /* SceneKitSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6B02101C76DB91006BAD93 /* SceneKitSampleTests.swift */; };
-		EC6B021C1C76DB91006BAD93 /* SceneKitSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6B021B1C76DB91006BAD93 /* SceneKitSampleUITests.swift */; };
+		ECA41A761C849811007776D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A691C849811007776D7 /* AppDelegate.swift */; };
+		ECA41A771C849811007776D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA41A6A1C849811007776D7 /* Assets.xcassets */; };
+		ECA41A781C849811007776D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA41A6B1C849811007776D7 /* LaunchScreen.storyboard */; };
+		ECA41A791C849811007776D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA41A6D1C849811007776D7 /* Main.storyboard */; };
+		ECA41A7A1C849811007776D7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A6F1C849811007776D7 /* Extensions.swift */; };
+		ECA41A7B1C849811007776D7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECA41A701C849811007776D7 /* Info.plist */; };
+		ECA41A7C1C849811007776D7 /* samples.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA41A711C849811007776D7 /* samples.scnassets */; };
+		ECA41A7D1C849811007776D7 /* SceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A721C849811007776D7 /* SceneManager.swift */; };
+		ECA41A7E1C849811007776D7 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A731C849811007776D7 /* Utilities.swift */; };
+		ECA41A7F1C849811007776D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A741C849811007776D7 /* ViewController.swift */; };
+		ECA41A801C849811007776D7 /* VRCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A751C849811007776D7 /* VRCamera.swift */; };
+		ECA41A841C849823007776D7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECA41A821C849823007776D7 /* Info.plist */; };
+		ECA41A851C849823007776D7 /* SceneKitSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A831C849823007776D7 /* SceneKitSampleTests.swift */; };
+		ECA41A891C849830007776D7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECA41A871C849830007776D7 /* Info.plist */; };
+		ECA41A8A1C849830007776D7 /* SceneKitSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A881C849830007776D7 /* SceneKitSampleUITests.swift */; };
 		ECA8388B1C7740630096809D /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECA8388A1C7740620096809D /* SceneKit.framework */; };
-		ECA838AD1C7967770096809D /* samples.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA838AC1C7967770096809D /* samples.scnassets */; };
-		ECAAFD3E1C81F23F00E936BF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAAFD3D1C81F23F00E936BF /* Extensions.swift */; };
-		ECCA9A401C818B8300C11C4B /* VRCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCA9A3F1C818B8300C11C4B /* VRCamera.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,25 +43,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EC3D75C61C844AA400015ECE /* SceneManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; };
-		EC3D75C81C846C7C00015ECE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		EC6B01F81C76DB91006BAD93 /* SceneKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC6B01FB1C76DB91006BAD93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EC6B01FD1C76DB91006BAD93 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		EC6B02001C76DB91006BAD93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EC6B02021C76DB91006BAD93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EC6B02051C76DB91006BAD93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		EC6B02071C76DB91006BAD93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EC6B020C1C76DB91006BAD93 /* SceneKitSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SceneKitSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC6B02101C76DB91006BAD93 /* SceneKitSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitSampleTests.swift; sourceTree = "<group>"; };
-		EC6B02121C76DB91006BAD93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EC6B02171C76DB91006BAD93 /* SceneKitSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SceneKitSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC6B021B1C76DB91006BAD93 /* SceneKitSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitSampleUITests.swift; sourceTree = "<group>"; };
-		EC6B021D1C76DB91006BAD93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECA41A691C849811007776D7 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ECA41A6A1C849811007776D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ECA41A6C1C849811007776D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ECA41A6E1C849811007776D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ECA41A6F1C849811007776D7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		ECA41A701C849811007776D7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECA41A711C849811007776D7 /* samples.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = samples.scnassets; path = SceneKitVRSample/samples.scnassets; sourceTree = "<group>"; };
+		ECA41A721C849811007776D7 /* SceneManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; };
+		ECA41A731C849811007776D7 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		ECA41A741C849811007776D7 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		ECA41A751C849811007776D7 /* VRCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VRCamera.swift; sourceTree = "<group>"; };
+		ECA41A821C849823007776D7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECA41A831C849823007776D7 /* SceneKitSampleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneKitSampleTests.swift; sourceTree = "<group>"; };
+		ECA41A871C849830007776D7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECA41A881C849830007776D7 /* SceneKitSampleUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneKitSampleUITests.swift; sourceTree = "<group>"; };
+		ECA41A8B1C849863007776D7 /* SceneKitVRSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneKitVRSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECA41A8C1C849992007776D7 /* SceneKitVRSample.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SceneKitVRSample.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECA41A8D1C8499AC007776D7 /* SceneKitVRSample.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SceneKitVRSample.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA8388A1C7740620096809D /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
-		ECA838AC1C7967770096809D /* samples.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = samples.scnassets; path = SceneKitSample/samples.scnassets; sourceTree = "<group>"; };
-		ECAAFD3D1C81F23F00E936BF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		ECCA9A3F1C818B8300C11C4B /* VRCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VRCamera.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,66 +93,59 @@
 		EC6B01EF1C76DB90006BAD93 = {
 			isa = PBXGroup;
 			children = (
-				ECA838AC1C7967770096809D /* samples.scnassets */,
+				ECA41A711C849811007776D7 /* samples.scnassets */,
+				ECA41A681C849811007776D7 /* SceneKitVRSample */,
+				ECA41A811C849823007776D7 /* SceneKitVRSampleTests */,
+				ECA41A861C849830007776D7 /* SceneKitVRSampleUITests */,
 				ECA8388A1C7740620096809D /* SceneKit.framework */,
-				EC6B01FA1C76DB91006BAD93 /* SceneKitSample */,
-				EC6B020F1C76DB91006BAD93 /* SceneKitSampleTests */,
-				EC6B021A1C76DB91006BAD93 /* SceneKitSampleUITests */,
-				EC6B01F91C76DB91006BAD93 /* Products */,
+				ECA41A8B1C849863007776D7 /* SceneKitVRSample.app */,
+				ECA41A8C1C849992007776D7 /* SceneKitVRSample.xctest */,
+				ECA41A8D1C8499AC007776D7 /* SceneKitVRSample.xctest */,
 			);
 			sourceTree = "<group>";
 		};
-		EC6B01F91C76DB91006BAD93 /* Products */ = {
+		ECA41A681C849811007776D7 /* SceneKitVRSample */ = {
 			isa = PBXGroup;
 			children = (
-				EC6B01F81C76DB91006BAD93 /* SceneKitSample.app */,
-				EC6B020C1C76DB91006BAD93 /* SceneKitSampleTests.xctest */,
-				EC6B02171C76DB91006BAD93 /* SceneKitSampleUITests.xctest */,
+				ECA41A691C849811007776D7 /* AppDelegate.swift */,
+				ECA41A6A1C849811007776D7 /* Assets.xcassets */,
+				ECA41A6B1C849811007776D7 /* LaunchScreen.storyboard */,
+				ECA41A6D1C849811007776D7 /* Main.storyboard */,
+				ECA41A6F1C849811007776D7 /* Extensions.swift */,
+				ECA41A701C849811007776D7 /* Info.plist */,
+				ECA41A721C849811007776D7 /* SceneManager.swift */,
+				ECA41A731C849811007776D7 /* Utilities.swift */,
+				ECA41A741C849811007776D7 /* ViewController.swift */,
+				ECA41A751C849811007776D7 /* VRCamera.swift */,
 			);
-			name = Products;
+			path = SceneKitVRSample;
 			sourceTree = "<group>";
 		};
-		EC6B01FA1C76DB91006BAD93 /* SceneKitSample */ = {
+		ECA41A811C849823007776D7 /* SceneKitVRSampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				EC3D75C61C844AA400015ECE /* SceneManager.swift */,
-				ECAAFD3D1C81F23F00E936BF /* Extensions.swift */,
-				EC6B01FB1C76DB91006BAD93 /* AppDelegate.swift */,
-				EC6B01FD1C76DB91006BAD93 /* ViewController.swift */,
-				ECCA9A3F1C818B8300C11C4B /* VRCamera.swift */,
-				EC3D75C81C846C7C00015ECE /* Utilities.swift */,
-				EC6B01FF1C76DB91006BAD93 /* Main.storyboard */,
-				EC6B02021C76DB91006BAD93 /* Assets.xcassets */,
-				EC6B02041C76DB91006BAD93 /* LaunchScreen.storyboard */,
-				EC6B02071C76DB91006BAD93 /* Info.plist */,
+				ECA41A821C849823007776D7 /* Info.plist */,
+				ECA41A831C849823007776D7 /* SceneKitSampleTests.swift */,
 			);
-			path = SceneKitSample;
+			path = SceneKitVRSampleTests;
 			sourceTree = "<group>";
 		};
-		EC6B020F1C76DB91006BAD93 /* SceneKitSampleTests */ = {
+		ECA41A861C849830007776D7 /* SceneKitVRSampleUITests */ = {
 			isa = PBXGroup;
 			children = (
-				EC6B02101C76DB91006BAD93 /* SceneKitSampleTests.swift */,
-				EC6B02121C76DB91006BAD93 /* Info.plist */,
+				ECA41A871C849830007776D7 /* Info.plist */,
+				ECA41A881C849830007776D7 /* SceneKitSampleUITests.swift */,
 			);
-			path = SceneKitSampleTests;
-			sourceTree = "<group>";
-		};
-		EC6B021A1C76DB91006BAD93 /* SceneKitSampleUITests */ = {
-			isa = PBXGroup;
-			children = (
-				EC6B021B1C76DB91006BAD93 /* SceneKitSampleUITests.swift */,
-				EC6B021D1C76DB91006BAD93 /* Info.plist */,
-			);
-			path = SceneKitSampleUITests;
+			name = SceneKitVRSampleUITests;
+			path = SceneKitVRSampleTests/SceneKitVRSampleUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EC6B01F71C76DB90006BAD93 /* SceneKitSample */ = {
+		EC6B01F71C76DB90006BAD93 /* SceneKitVRSample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EC6B02201C76DB91006BAD93 /* Build configuration list for PBXNativeTarget "SceneKitSample" */;
+			buildConfigurationList = EC6B02201C76DB91006BAD93 /* Build configuration list for PBXNativeTarget "SceneKitVRSample" */;
 			buildPhases = (
 				EC6B01F41C76DB90006BAD93 /* Sources */,
 				EC6B01F51C76DB90006BAD93 /* Frameworks */,
@@ -159,14 +155,14 @@
 			);
 			dependencies = (
 			);
-			name = SceneKitSample;
+			name = SceneKitVRSample;
 			productName = SceneKitSample;
-			productReference = EC6B01F81C76DB91006BAD93 /* SceneKitSample.app */;
+			productReference = ECA41A8B1C849863007776D7 /* SceneKitVRSample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		EC6B020B1C76DB91006BAD93 /* SceneKitSampleTests */ = {
+		EC6B020B1C76DB91006BAD93 /* SceneKitVRSampleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EC6B02231C76DB91006BAD93 /* Build configuration list for PBXNativeTarget "SceneKitSampleTests" */;
+			buildConfigurationList = EC6B02231C76DB91006BAD93 /* Build configuration list for PBXNativeTarget "SceneKitVRSampleTests" */;
 			buildPhases = (
 				EC6B02081C76DB91006BAD93 /* Sources */,
 				EC6B02091C76DB91006BAD93 /* Frameworks */,
@@ -177,14 +173,14 @@
 			dependencies = (
 				EC6B020E1C76DB91006BAD93 /* PBXTargetDependency */,
 			);
-			name = SceneKitSampleTests;
+			name = SceneKitVRSampleTests;
 			productName = SceneKitSampleTests;
-			productReference = EC6B020C1C76DB91006BAD93 /* SceneKitSampleTests.xctest */;
+			productReference = ECA41A8D1C8499AC007776D7 /* SceneKitVRSample.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		EC6B02161C76DB91006BAD93 /* SceneKitSampleUITests */ = {
+		EC6B02161C76DB91006BAD93 /* SceneKitVRSampleUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EC6B02261C76DB91006BAD93 /* Build configuration list for PBXNativeTarget "SceneKitSampleUITests" */;
+			buildConfigurationList = EC6B02261C76DB91006BAD93 /* Build configuration list for PBXNativeTarget "SceneKitVRSampleUITests" */;
 			buildPhases = (
 				EC6B02131C76DB91006BAD93 /* Sources */,
 				EC6B02141C76DB91006BAD93 /* Frameworks */,
@@ -195,9 +191,9 @@
 			dependencies = (
 				EC6B02191C76DB91006BAD93 /* PBXTargetDependency */,
 			);
-			name = SceneKitSampleUITests;
+			name = SceneKitVRSampleUITests;
 			productName = SceneKitSampleUITests;
-			productReference = EC6B02171C76DB91006BAD93 /* SceneKitSampleUITests.xctest */;
+			productReference = ECA41A8C1C849992007776D7 /* SceneKitVRSample.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -224,7 +220,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EC6B01F31C76DB90006BAD93 /* Build configuration list for PBXProject "SceneKitSample" */;
+			buildConfigurationList = EC6B01F31C76DB90006BAD93 /* Build configuration list for PBXProject "SceneKitVRSample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -233,13 +229,13 @@
 				Base,
 			);
 			mainGroup = EC6B01EF1C76DB90006BAD93;
-			productRefGroup = EC6B01F91C76DB91006BAD93 /* Products */;
+			productRefGroup = EC6B01EF1C76DB90006BAD93;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EC6B01F71C76DB90006BAD93 /* SceneKitSample */,
-				EC6B020B1C76DB91006BAD93 /* SceneKitSampleTests */,
-				EC6B02161C76DB91006BAD93 /* SceneKitSampleUITests */,
+				EC6B01F71C76DB90006BAD93 /* SceneKitVRSample */,
+				EC6B020B1C76DB91006BAD93 /* SceneKitVRSampleTests */,
+				EC6B02161C76DB91006BAD93 /* SceneKitVRSampleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -249,10 +245,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC6B02061C76DB91006BAD93 /* LaunchScreen.storyboard in Resources */,
-				EC6B02031C76DB91006BAD93 /* Assets.xcassets in Resources */,
-				EC6B02011C76DB91006BAD93 /* Main.storyboard in Resources */,
-				ECA838AD1C7967770096809D /* samples.scnassets in Resources */,
+				ECA41A781C849811007776D7 /* LaunchScreen.storyboard in Resources */,
+				ECA41A7C1C849811007776D7 /* samples.scnassets in Resources */,
+				ECA41A771C849811007776D7 /* Assets.xcassets in Resources */,
+				ECA41A7B1C849811007776D7 /* Info.plist in Resources */,
+				ECA41A791C849811007776D7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECA41A841C849823007776D7 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECA41A891C849830007776D7 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,12 +276,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECAAFD3E1C81F23F00E936BF /* Extensions.swift in Sources */,
-				EC3D75C91C846C7C00015ECE /* Utilities.swift in Sources */,
-				EC6B01FE1C76DB91006BAD93 /* ViewController.swift in Sources */,
-				ECCA9A401C818B8300C11C4B /* VRCamera.swift in Sources */,
-				EC3D75C71C844AA400015ECE /* SceneManager.swift in Sources */,
-				EC6B01FC1C76DB91006BAD93 /* AppDelegate.swift in Sources */,
+				ECA41A7F1C849811007776D7 /* ViewController.swift in Sources */,
+				ECA41A761C849811007776D7 /* AppDelegate.swift in Sources */,
+				ECA41A801C849811007776D7 /* VRCamera.swift in Sources */,
+				ECA41A7D1C849811007776D7 /* SceneManager.swift in Sources */,
+				ECA41A7E1C849811007776D7 /* Utilities.swift in Sources */,
+				ECA41A7A1C849811007776D7 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC6B02111C76DB91006BAD93 /* SceneKitSampleTests.swift in Sources */,
+				ECA41A851C849823007776D7 /* SceneKitSampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC6B021C1C76DB91006BAD93 /* SceneKitSampleUITests.swift in Sources */,
+				ECA41A8A1C849830007776D7 /* SceneKitSampleUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,31 +306,31 @@
 /* Begin PBXTargetDependency section */
 		EC6B020E1C76DB91006BAD93 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EC6B01F71C76DB90006BAD93 /* SceneKitSample */;
+			target = EC6B01F71C76DB90006BAD93 /* SceneKitVRSample */;
 			targetProxy = EC6B020D1C76DB91006BAD93 /* PBXContainerItemProxy */;
 		};
 		EC6B02191C76DB91006BAD93 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EC6B01F71C76DB90006BAD93 /* SceneKitSample */;
+			target = EC6B01F71C76DB90006BAD93 /* SceneKitVRSample */;
 			targetProxy = EC6B02181C76DB91006BAD93 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		EC6B01FF1C76DB91006BAD93 /* Main.storyboard */ = {
+		ECA41A6B1C849811007776D7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EC6B02001C76DB91006BAD93 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		EC6B02041C76DB91006BAD93 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EC6B02051C76DB91006BAD93 /* Base */,
+				ECA41A6C1C849811007776D7 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		ECA41A6D1C849811007776D7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ECA41A6E1C849811007776D7 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -425,10 +424,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = SceneKitSample/Info.plist;
+				INFOPLIST_FILE = SceneKitVRSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.jiminis.SceneKitSample;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = me.jiminis.SceneKitVRSample;
+				PRODUCT_NAME = SceneKitVRSample;
 			};
 			name = Debug;
 		};
@@ -437,10 +436,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = SceneKitSample/Info.plist;
+				INFOPLIST_FILE = SceneKitVRSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.jiminis.SceneKitSample;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = me.jiminis.SceneKitVRSample;
+				PRODUCT_NAME = SceneKitVRSample;
 			};
 			name = Release;
 		};
@@ -448,11 +447,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = SceneKitSampleTests/Info.plist;
+				INFOPLIST_FILE = SceneKitVRSampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.jiminis.SceneKitSampleTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SceneKitSample.app/SceneKitSample";
+				PRODUCT_BUNDLE_IDENTIFIER = me.jiminis.SceneKitVRSampleTests;
+				PRODUCT_NAME = SceneKitVRSample;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SceneKitVRSample.app/SceneKitVRSample";
 			};
 			name = Debug;
 		};
@@ -460,22 +459,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = SceneKitSampleTests/Info.plist;
+				INFOPLIST_FILE = SceneKitVRSampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.jiminis.SceneKitSampleTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SceneKitSample.app/SceneKitSample";
+				PRODUCT_BUNDLE_IDENTIFIER = me.jiminis.SceneKitVRSampleTests;
+				PRODUCT_NAME = SceneKitVRSample;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SceneKitVRSample.app/SceneKitVRSample";
 			};
 			name = Release;
 		};
 		EC6B02271C76DB91006BAD93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = SceneKitSampleUITests/Info.plist;
+				INFOPLIST_FILE = SceneKitVRSampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.jiminis.SceneKitSampleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = SceneKitSample;
+				PRODUCT_BUNDLE_IDENTIFIER = me.jiminis.SceneKitVRSampleUITests;
+				PRODUCT_NAME = SceneKitVRSample;
+				TEST_TARGET_NAME = SceneKitVRSample;
 				USES_XCTRUNNER = YES;
 			};
 			name = Debug;
@@ -483,11 +482,11 @@
 		EC6B02281C76DB91006BAD93 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = SceneKitSampleUITests/Info.plist;
+				INFOPLIST_FILE = SceneKitVRSampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.jiminis.SceneKitSampleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = SceneKitSample;
+				PRODUCT_BUNDLE_IDENTIFIER = me.jiminis.SceneKitVRSampleUITests;
+				PRODUCT_NAME = SceneKitVRSample;
+				TEST_TARGET_NAME = SceneKitVRSample;
 				USES_XCTRUNNER = YES;
 			};
 			name = Release;
@@ -495,7 +494,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EC6B01F31C76DB90006BAD93 /* Build configuration list for PBXProject "SceneKitSample" */ = {
+		EC6B01F31C76DB90006BAD93 /* Build configuration list for PBXProject "SceneKitVRSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EC6B021E1C76DB91006BAD93 /* Debug */,
@@ -504,7 +503,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EC6B02201C76DB91006BAD93 /* Build configuration list for PBXNativeTarget "SceneKitSample" */ = {
+		EC6B02201C76DB91006BAD93 /* Build configuration list for PBXNativeTarget "SceneKitVRSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EC6B02211C76DB91006BAD93 /* Debug */,
@@ -513,7 +512,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EC6B02231C76DB91006BAD93 /* Build configuration list for PBXNativeTarget "SceneKitSampleTests" */ = {
+		EC6B02231C76DB91006BAD93 /* Build configuration list for PBXNativeTarget "SceneKitVRSampleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EC6B02241C76DB91006BAD93 /* Debug */,
@@ -522,7 +521,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EC6B02261C76DB91006BAD93 /* Build configuration list for PBXNativeTarget "SceneKitSampleUITests" */ = {
+		EC6B02261C76DB91006BAD93 /* Build configuration list for PBXNativeTarget "SceneKitVRSampleUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EC6B02271C76DB91006BAD93 /* Debug */,

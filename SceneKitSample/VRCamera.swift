@@ -77,7 +77,7 @@ class VRCamera: SCNNode {
         }
     }
     
-    init(interpupilaryDistance:Float = 6.0, isBarrelDistortionEnabled:Bool = true) {
+    init(interpupilaryDistance:Float = 0.06, isBarrelDistortionEnabled:Bool = true) {
 
         //pre-load barrel distortion shader
         let path:NSURL? = NSBundle.mainBundle().URLForResource("samples.scnassets/barrelDistortion", withExtension: "plist")
@@ -98,11 +98,7 @@ class VRCamera: SCNNode {
             self.isBarrelDistortionEnabled = isBarrelDistortionEnabled
         
         }()
-        
-        let testObj = SCNNode()
-        testObj.geometry = SCNSphere(radius: 30)
-        testObj.position = SCNVector3(0, 0, -200)
-        self.addChildNode(testObj)
+
 
     }
     

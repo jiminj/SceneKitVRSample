@@ -11,8 +11,8 @@ import SceneKit
 class SceneManager {
     
     let scene:SCNScene
-    var roomWidth:Float = 600
-    var roomHeight:Float = 200
+    var roomWidth:Float = 10.0
+    var roomHeight:Float = 3.0
     let spotlightTemplate:SCNLight = SCNLight()
     
     init(let scene:SCNScene)
@@ -42,6 +42,7 @@ class SceneManager {
         let floor = SCNFloor()
         floor.reflectivity = 0
         floor.firstMaterial?.diffuse.contents = textureName
+        floor.firstMaterial?.diffuse.contentsTransform = SCNMatrix4MakeScale(100.0, 100.0, 100.0)
         floor.firstMaterial?.locksAmbientWithDiffuse = true
         floor.firstMaterial?.diffuse.wrapS = SCNWrapMode.Repeat;
         floor.firstMaterial?.diffuse.wrapT = SCNWrapMode.Repeat;
@@ -51,13 +52,6 @@ class SceneManager {
         floorNode.physicsBody = SCNPhysicsBody.staticBody()
         scene.rootNode.addChildNode(floorNode)
         
-        //Ceil
-        let ceilNode = SCNNode(geometry: SCNPlane(width: CGFloat(roomWidth), height: CGFloat(roomWidth)))
-        ceilNode.geometry?.firstMaterial?.diffuse.contents = UIColor(white: 22, alpha: 1)
-        ceilNode.position = SCNVector3Make(0, roomHeight, 0)
-        ceilNode.rotation = SCNVector4Make(1, 0, 0, Float(M_PI_2))
-        
-        //scene.rootNode.addChildNode(ceilNode)
     }
     
     func generateWalls(textureName:String) {
@@ -104,6 +98,7 @@ class SceneManager {
         wallNode.rotation = SCNVector4Make(0, 1, 0, Float(M_PI))
         scene.rootNode.addChildNode(wallNode)
         
+        
     }
     
     func addLights() {
@@ -113,51 +108,30 @@ class SceneManager {
         spotlightTemplate.castsShadow = true;
         spotlightTemplate.shadowColor = UIColor(white: 0.1, alpha: 0.5)
         spotlightTemplate.shadowRadius = 1.0
-        spotlightTemplate.zNear = 30
-        spotlightTemplate.zFar = CGFloat(roomHeight) + 10
+        spotlightTemplate.zNear = 1.0
+        spotlightTemplate.zFar = CGFloat(roomHeight) + 1.0
         spotlightTemplate.spotInnerAngle = 30
         spotlightTemplate.spotOuterAngle = 50
         
         let roomLight = SCNLight()
         roomLight.type = SCNLightTypeSpot
-        roomLight.color = UIColor(white: 1.0, alpha: 1.0)
-//        roomLight.color = UIColor(red: 0.57, green: 0.55, blue: 0.40, alpha: 1.0)
+        roomLight.color = UIColor(white: 1.0, alpha: 0.3)
         
         roomLight.castsShadow = true;
         roomLight.shadowColor = UIColor(white: 0.1, alpha: 0.5)
-//        roomLight.shadowRadius = 2.0
-        
-//        
-        roomLight.zNear = 10;
-        roomLight.zFar = CGFloat(roomWidth * 2.0);
-        roomLight.spotInnerAngle = 120
-        roomLight.spotOuterAngle = 180
+        roomLight.zNear = 1.0;
+        roomLight.zFar = CGFloat(roomWidth);
+        roomLight.spotInnerAngle = 90
+        roomLight.spotOuterAngle = 150
 
-        //        lightNode.light?.attenuationStartDistance = 500
-        //        lightNode.light?.attenuationEndDistance = 800
-        //        lightNode.light?.attenuationFalloffExponent = 1.0
         
         let roomLightNode = SCNNode()
         roomLightNode.light = roomLight
         roomLightNode.rotation = SCNVector4Make(1, 0, 0, Float(-M_PI_2));
-        roomLightNode.position = SCNVector3Make(0, roomHeight - 10, 0)
+        roomLightNode.position = SCNVector3Make(0, roomHeight * 1.2, 0)
         
         scene.rootNode.addChildNode(roomLightNode)
-        //
-        //        let testLight = SCNLight()
-        //        testLight.type = SCNLightTypeSpot
-        //        testLight.color = UIColor(white: 1.0, alpha: 1.0)
-        //        testLight.castsShadow = true;
-        //        testLight.zNear = 30
-        //        testLight.zFar = 500
-        //        testLight.shadowRadius = 1.0
-        //        testLight.spotInnerAngle = 30
-        //        testLight.spotOuterAngle = 50
-        ////
-        //        let testLightNode = SCNNode()
-        //        testLightNode.light = testLight
-        //        testLightNode.position = SCNVector3Make(0, roomHeight/3, 0)
-        //        rootNode.addChildNode(testLightNode)
+
         
     }
     

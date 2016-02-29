@@ -21,14 +21,15 @@ class ViewController: UIViewController {
     let cameraNode = VRCamera()
     var cameraController:CameraController
     
-    var boundaryOffset:Float = 20
-    var roomBoundaryAbs:Float = 280
-    var roomWidth:Float = 600 {
-        willSet{
-            roomBoundaryAbs = newValue / 2 - boundaryOffset
-        }
-    }
-    var roomHeight:Float = 200
+//    var boundaryOffset:Float = 20
+//    var roomBoundaryAbs:Float = 280
+//    var roomWidth:Float = 6
+//        {
+//        willSet{
+//            roomBoundaryAbs = newValue / 2 - boundaryOffset
+//        }
+//    }
+//    var roomHeight:Float = 200
     
     required init(coder aDecoder: NSCoder) {
         
@@ -42,40 +43,40 @@ class ViewController: UIViewController {
 
         super.viewDidLoad()
         
-        sceneManager.generateRoom(1000, height: 200)
+        sceneManager.generateRoom(10.0, height: 3.0)
         
         leftSceneView.backgroundColor = UIColor.blackColor()
         rightSceneView.backgroundColor = UIColor.blackColor()
         leftSceneView.showsStatistics = true
         rightSceneView.showsStatistics = true
-        
-        
+
         let Models:[ModelInformation] = [
-            ModelInformation(filename: "samples.scnassets/Writing_Desk.scn"),
+            ModelInformation(filename: "samples.scnassets/Writing_Desk.scn",
+                            scale: SCNVector3Make(0.016, 0.016, 0.016)),
             
             ModelInformation(filename: "samples.scnassets/Wood_Table.scn",
-                            scale: SCNVector3Make(100.0, 100.0, 100.0),
+                            scale: SCNVector3Make(1.2, 1.2, 1.2),
                             rotation: SCNVector4(1, 0, 0, -Float(M_PI_2))),
             
             ModelInformation(filename: "samples.scnassets/cat.scn",
-                            scale: SCNVector3Make(70.0, 70.0, 70.0)),
+                            scale: SCNVector3Make(0.7, 0.7, 0.7)),
             
             ModelInformation(filename: "samples.scnassets/Wooden_Chair.scn",
-                            scale: SCNVector3Make(50.0, 50.0, 50.0)),
+                            scale: SCNVector3Make(0.5, 0.5, 0.5)),
             
             ModelInformation(filename: "samples.scnassets/Ambulance.scn",
-                            scale: SCNVector3Make(0.2, 0.2, 0.2),
+                            scale: SCNVector3Make(0.002, 0.002, 0.002),
                             rotation: SCNVector4(0,1,0, Float(M_PI)))
         ]
 
-        
-        arrangeModelsOnScene(Models, radius:300)
+//
+        arrangeModelsOnScene(Models, radius:3.0)
         
         leftSceneView.scene = scene
         rightSceneView.scene = scene
         
         //Setup Camera
-        cameraNode.position = SCNVector3(x: 0, y: 150, z: 0)
+        cameraNode.position = SCNVector3(x: 0, y: 1.7, z: 0)
         cameraNode.left.camera?.automaticallyAdjustsZRange = true
         cameraNode.right.camera?.automaticallyAdjustsZRange = true
         scene.rootNode.addChildNode(cameraNode)
@@ -105,7 +106,7 @@ class ViewController: UIViewController {
             sceneManager.addModel( model,
                         position: SCNVector3Make(curX, 0, -curZ),
                         rotation:SCNVector4Make(0, 1, 0, -Float(curAngle)),
-                        spotlight: false )
+                        spotlight: true )
             
             curAngle += angleStep
         }
@@ -115,7 +116,7 @@ class ViewController: UIViewController {
     
     var panAccumulation:vector_float3 = vector_float3(0,0,0)
     let tiltSpeed:Float = 0.005
-    let moveSpeed:Float = 1.0
+    let moveSpeed:Float = 0.01
     
     //temporal solution
     var currentGestureNumberOfTouches = 0

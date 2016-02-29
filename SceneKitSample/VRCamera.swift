@@ -10,12 +10,12 @@ import UIKit
 import SceneKit
 import simd
 
-class VRCameraController {
+class CameraController {
     
-    var camera : VRCamera
+    var camera : SCNNode
 //    var maxFOV:Float = Float(M_PI)
 
-    init(camera:VRCamera) {
+    init(camera:SCNNode) {
         self.camera = camera
     }
     
@@ -48,44 +48,41 @@ class VRCameraController {
 
         camera.position.x = camera.position.x + cameraMovement.x
         camera.position.z = camera.position.z + cameraMovement.y
-
-        
     }
     
 }
-
-
-class TechniqueLoader {
-    static func LoadFromJson(path:String) -> SCNTechnique {
-        var technique = SCNTechnique()
-        let data = NSData(contentsOfFile: path)
-        do {
-            let dict = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers)
-            technique = SCNTechnique(dictionary: dict as! Dictionary)!
-            
-        } catch let error as NSError {
-            print("json error: \(error.localizedDescription)")
-        }
-        return technique
-    }
-
-}
-
 
 class VRCamera: SCNNode {
     
     let left : SCNNode = SCNNode()
     let right : SCNNode = SCNNode()
-    let barrel_shader = SCNTechnique()
+    let barrelDistortionShader:SCNTechnique?
     var interpupilaryDistance:Float = 0 {
-        willSet
-        {
+        willSet {
             left.position = SCNVector3(x: -newValue/2, y: 0, z: 0)
             right.position = SCNVector3(x: newValue/2, y: 0, z: 0)
         }
     }
     
-    init(interpupilaryDistance:Float = 6.0) {
+    var isBarrelDistortionEnabled:Bool = false {
+        willSet {
+            if(newValue == true) {
+                left.camera?.technique = barrelDistortionShader
+                right.camera?.technique = barrelDistortionShader
+            }
+            else {
+                left.camera?.technique = nil
+                right.camera?.technique = nil
+            }
+        }
+    }
+    
+    init(interpupilaryDistance:Float = 6.0, isBarrelDistortionEnabled:Bool = true) {
+
+        //pre-load barrel distortion shader
+        let path:NSURL? = NSBundle.mainBundle().URLForResource("samples.scnassets/barrelDistortion", withExtension: "plist")
+        barrelDistortionShader = TechniqueLoader.load(path)
+        
         super.init()
         
         left.camera = SCNCamera()
@@ -95,23 +92,18 @@ class VRCamera: SCNNode {
         right.camera = SCNCamera()
         right.name = "Right"
         self.addChildNode(right);
-    
         
-        { self.interpupilaryDistance = interpupilaryDistance } ()
+        {
+            self.interpupilaryDistance = interpupilaryDistance
+            self.isBarrelDistortionEnabled = isBarrelDistortionEnabled
         
-        setupBarrelShader()
- 
+        }()
+        
+        let testObj = SCNNode()
+        testObj.geometry = SCNSphere(radius: 30)
+        testObj.position = SCNVector3(0, 0, -200)
+        self.addChildNode(testObj)
 
-    }
-    
-    func setupBarrelShader() {
-        
-        let path = NSBundle.mainBundle().URLForResource("samples.scnassets/barrelDistortion", withExtension: "plist")
-        let dic = NSDictionary(contentsOfURL: path!)
-        let technique = SCNTechnique(dictionary: dic as! Dictionary)
-        
-        left.camera?.technique = technique
-        right.camera?.technique = technique
     }
     
     required init?(coder aDecoder: NSCoder) {

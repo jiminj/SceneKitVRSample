@@ -16,10 +16,10 @@ class ViewController: UIViewController {
     @IBOutlet var leftSceneView: SCNView!
     @IBOutlet var rightSceneView: SCNView!
     
-    let scene = SampleScene(width:1000)
-//    let cameraNode = SCNNode()
+    let scene = SCNScene()
+    let sceneManager:SceneManager
     let cameraNode = VRCamera()
-    var cameraController:VRCameraController
+    var cameraController:CameraController
     
     var boundaryOffset:Float = 20
     var roomBoundaryAbs:Float = 280
@@ -32,7 +32,8 @@ class ViewController: UIViewController {
     
     required init(coder aDecoder: NSCoder) {
         
-        cameraController = VRCameraController(camera: cameraNode)
+        sceneManager = SceneManager(scene: scene)
+        cameraController = CameraController(camera: cameraNode)
         super.init(coder: aDecoder)!
     
     }
@@ -41,18 +42,32 @@ class ViewController: UIViewController {
 
         super.viewDidLoad()
         
+        sceneManager.generateRoom(1000, height: 200)
+        
         leftSceneView.backgroundColor = UIColor.blackColor()
         rightSceneView.backgroundColor = UIColor.blackColor()
         leftSceneView.showsStatistics = true
         rightSceneView.showsStatistics = true
         
+        
         let Models:[ModelInformation] = [
-            ModelInformation(filename: "samples.scnassets/Writing_Desk.scn", scale: SCNVector3Make(1.0, 1.0, 1.0), rotation: SCNVector4(0,0,0,0)),
-            ModelInformation(filename: "samples.scnassets/Wood_Table.scn", scale: SCNVector3Make(100.0, 100.0, 100.0), rotation: SCNVector4(1, 0, 0, -Float(M_PI_2))),
-            ModelInformation(filename: "samples.scnassets/cat.scn", scale: SCNVector3Make(70.0, 70.0, 70.0), rotation: SCNVector4(0,0,0,0)),
-            ModelInformation(filename: "samples.scnassets/Wooden_Chair.scn", scale: SCNVector3Make(50.0, 50.0, 50.0), rotation: SCNVector4(0,0,0,0)),
-            ModelInformation(filename: "samples.scnassets/Ambulance.scn", scale: SCNVector3Make(0.2, 0.2, 0.2), rotation: SCNVector4(0,1,0, Float(M_PI)))
+            ModelInformation(filename: "samples.scnassets/Writing_Desk.scn"),
+            
+            ModelInformation(filename: "samples.scnassets/Wood_Table.scn",
+                            scale: SCNVector3Make(100.0, 100.0, 100.0),
+                            rotation: SCNVector4(1, 0, 0, -Float(M_PI_2))),
+            
+            ModelInformation(filename: "samples.scnassets/cat.scn",
+                            scale: SCNVector3Make(70.0, 70.0, 70.0)),
+            
+            ModelInformation(filename: "samples.scnassets/Wooden_Chair.scn",
+                            scale: SCNVector3Make(50.0, 50.0, 50.0)),
+            
+            ModelInformation(filename: "samples.scnassets/Ambulance.scn",
+                            scale: SCNVector3Make(0.2, 0.2, 0.2),
+                            rotation: SCNVector4(0,1,0, Float(M_PI)))
         ]
+
         
         arrangeModelsOnScene(Models, radius:300)
         
@@ -87,10 +102,10 @@ class ViewController: UIViewController {
             let curX:Float = Float(sin(curAngle)) * radius
             let curZ:Float = Float(cos(curAngle)) * radius
             
-            scene.addModel( model,
-                position: SCNVector3Make(curX, 0, -curZ),
-                rotation:SCNVector4Make(0, 1, 0, -Float(curAngle)),
-                spotlight: true )
+            sceneManager.addModel( model,
+                        position: SCNVector3Make(curX, 0, -curZ),
+                        rotation:SCNVector4Make(0, 1, 0, -Float(curAngle)),
+                        spotlight: false )
             
             curAngle += angleStep
         }

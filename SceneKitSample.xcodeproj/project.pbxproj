@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC3D75C71C844AA400015ECE /* SceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3D75C61C844AA400015ECE /* SceneManager.swift */; };
+		EC3D75C91C846C7C00015ECE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3D75C81C846C7C00015ECE /* Utilities.swift */; };
 		EC6B01FC1C76DB91006BAD93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6B01FB1C76DB91006BAD93 /* AppDelegate.swift */; };
 		EC6B01FE1C76DB91006BAD93 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6B01FD1C76DB91006BAD93 /* ViewController.swift */; };
 		EC6B02011C76DB91006BAD93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC6B01FF1C76DB91006BAD93 /* Main.storyboard */; };
@@ -14,7 +16,6 @@
 		EC6B02061C76DB91006BAD93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC6B02041C76DB91006BAD93 /* LaunchScreen.storyboard */; };
 		EC6B02111C76DB91006BAD93 /* SceneKitSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6B02101C76DB91006BAD93 /* SceneKitSampleTests.swift */; };
 		EC6B021C1C76DB91006BAD93 /* SceneKitSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6B021B1C76DB91006BAD93 /* SceneKitSampleUITests.swift */; };
-		EC7598991C820A4000480CA9 /* SampleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7598981C820A4000480CA9 /* SampleScene.swift */; };
 		ECA8388B1C7740630096809D /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECA8388A1C7740620096809D /* SceneKit.framework */; };
 		ECA838AD1C7967770096809D /* samples.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA838AC1C7967770096809D /* samples.scnassets */; };
 		ECAAFD3E1C81F23F00E936BF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAAFD3D1C81F23F00E936BF /* Extensions.swift */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC3D75C61C844AA400015ECE /* SceneManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; };
+		EC3D75C81C846C7C00015ECE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EC6B01F81C76DB91006BAD93 /* SceneKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC6B01FB1C76DB91006BAD93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC6B01FD1C76DB91006BAD93 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -52,7 +55,6 @@
 		EC6B02171C76DB91006BAD93 /* SceneKitSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SceneKitSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC6B021B1C76DB91006BAD93 /* SceneKitSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitSampleUITests.swift; sourceTree = "<group>"; };
 		EC6B021D1C76DB91006BAD93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EC7598981C820A4000480CA9 /* SampleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleScene.swift; sourceTree = "<group>"; };
 		ECA8388A1C7740620096809D /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		ECA838AC1C7967770096809D /* samples.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = samples.scnassets; path = SceneKitSample/samples.scnassets; sourceTree = "<group>"; };
 		ECAAFD3D1C81F23F00E936BF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -110,11 +112,12 @@
 		EC6B01FA1C76DB91006BAD93 /* SceneKitSample */ = {
 			isa = PBXGroup;
 			children = (
-				EC7598981C820A4000480CA9 /* SampleScene.swift */,
+				EC3D75C61C844AA400015ECE /* SceneManager.swift */,
 				ECAAFD3D1C81F23F00E936BF /* Extensions.swift */,
 				EC6B01FB1C76DB91006BAD93 /* AppDelegate.swift */,
 				EC6B01FD1C76DB91006BAD93 /* ViewController.swift */,
 				ECCA9A3F1C818B8300C11C4B /* VRCamera.swift */,
+				EC3D75C81C846C7C00015ECE /* Utilities.swift */,
 				EC6B01FF1C76DB91006BAD93 /* Main.storyboard */,
 				EC6B02021C76DB91006BAD93 /* Assets.xcassets */,
 				EC6B02041C76DB91006BAD93 /* LaunchScreen.storyboard */,
@@ -275,9 +278,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECAAFD3E1C81F23F00E936BF /* Extensions.swift in Sources */,
-				EC7598991C820A4000480CA9 /* SampleScene.swift in Sources */,
+				EC3D75C91C846C7C00015ECE /* Utilities.swift in Sources */,
 				EC6B01FE1C76DB91006BAD93 /* ViewController.swift in Sources */,
 				ECCA9A401C818B8300C11C4B /* VRCamera.swift in Sources */,
+				EC3D75C71C844AA400015ECE /* SceneManager.swift in Sources */,
 				EC6B01FC1C76DB91006BAD93 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

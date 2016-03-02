@@ -17,23 +17,13 @@ class ViewController: UIViewController {
     @IBOutlet var rightSceneView: SCNView!
     
     let scene = SCNScene()
-    let sceneManager:SceneManager
+    let sceneComposer:SampleSceneComposer
     let cameraNode = VRCamera()
     var cameraController:CameraController
     
-//    var boundaryOffset:Float = 20
-//    var roomBoundaryAbs:Float = 280
-//    var roomWidth:Float = 6
-//        {
-//        willSet{
-//            roomBoundaryAbs = newValue / 2 - boundaryOffset
-//        }
-//    }
-//    var roomHeight:Float = 200
-    
     required init(coder aDecoder: NSCoder) {
         
-        sceneManager = SceneManager(scene: scene)
+        sceneComposer = SampleSceneComposer(scene: scene, width: 10.0, height: 2.5)
         cameraController = CameraController(camera: cameraNode)
         super.init(coder: aDecoder)!
     
@@ -42,8 +32,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
 
         super.viewDidLoad()
-        
-        sceneManager.generateRoom(10.0, height: 3.0)
         
         leftSceneView.backgroundColor = UIColor.blackColor()
         rightSceneView.backgroundColor = UIColor.blackColor()
@@ -103,7 +91,7 @@ class ViewController: UIViewController {
             let curX:Float = Float(sin(curAngle)) * radius
             let curZ:Float = Float(cos(curAngle)) * radius
             
-            sceneManager.addModel( model,
+            sceneComposer.loadObject( model,
                         position: SCNVector3Make(curX, 0, -curZ),
                         rotation:SCNVector4Make(0, 1, 0, -Float(curAngle)),
                         spotlight: true )

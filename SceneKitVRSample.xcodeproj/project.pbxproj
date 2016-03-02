@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC5D4C6F1C86F675005B14E6 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5D4C6E1C86F675005B14E6 /* CameraController.swift */; };
 		ECA41A761C849811007776D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A691C849811007776D7 /* AppDelegate.swift */; };
 		ECA41A771C849811007776D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA41A6A1C849811007776D7 /* Assets.xcassets */; };
 		ECA41A781C849811007776D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA41A6B1C849811007776D7 /* LaunchScreen.storyboard */; };
@@ -14,7 +15,7 @@
 		ECA41A7A1C849811007776D7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A6F1C849811007776D7 /* Extensions.swift */; };
 		ECA41A7B1C849811007776D7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECA41A701C849811007776D7 /* Info.plist */; };
 		ECA41A7C1C849811007776D7 /* samples.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA41A711C849811007776D7 /* samples.scnassets */; };
-		ECA41A7D1C849811007776D7 /* SceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A721C849811007776D7 /* SceneManager.swift */; };
+		ECA41A7D1C849811007776D7 /* SampleSceneComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A721C849811007776D7 /* SampleSceneComposer.swift */; };
 		ECA41A7E1C849811007776D7 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A731C849811007776D7 /* Utilities.swift */; };
 		ECA41A7F1C849811007776D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A741C849811007776D7 /* ViewController.swift */; };
 		ECA41A801C849811007776D7 /* VRCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA41A751C849811007776D7 /* VRCamera.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC5D4C6E1C86F675005B14E6 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		ECA41A691C849811007776D7 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECA41A6A1C849811007776D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECA41A6C1C849811007776D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,7 +52,7 @@
 		ECA41A6F1C849811007776D7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		ECA41A701C849811007776D7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECA41A711C849811007776D7 /* samples.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = samples.scnassets; path = SceneKitVRSample/samples.scnassets; sourceTree = "<group>"; };
-		ECA41A721C849811007776D7 /* SceneManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; };
+		ECA41A721C849811007776D7 /* SampleSceneComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleSceneComposer.swift; sourceTree = "<group>"; };
 		ECA41A731C849811007776D7 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		ECA41A741C849811007776D7 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ECA41A751C849811007776D7 /* VRCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VRCamera.swift; sourceTree = "<group>"; };
@@ -59,8 +61,8 @@
 		ECA41A871C849830007776D7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECA41A881C849830007776D7 /* SceneKitSampleUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneKitSampleUITests.swift; sourceTree = "<group>"; };
 		ECA41A8B1C849863007776D7 /* SceneKitVRSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneKitVRSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECA41A8C1C849992007776D7 /* SceneKitVRSample.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SceneKitVRSample.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECA41A8D1C8499AC007776D7 /* SceneKitVRSample.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SceneKitVRSample.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECA41A8C1C849992007776D7 /* SceneKitVRSample.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SceneKitVRSample.xctest; path = "/Users/Jimin/Development/SceneKitVRSample/build/Debug-iphoneos/SceneKitVRSample.xctest"; sourceTree = "<absolute>"; };
+		ECA41A8D1C8499AC007776D7 /* SceneKitVRSample.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SceneKitVRSample.xctest; path = "/Users/Jimin/Development/SceneKitVRSample/build/Debug-iphoneos/SceneKitVRSample.xctest"; sourceTree = "<absolute>"; };
 		ECA8388A1C7740620096809D /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -99,8 +101,6 @@
 				ECA41A861C849830007776D7 /* SceneKitVRSampleUITests */,
 				ECA8388A1C7740620096809D /* SceneKit.framework */,
 				ECA41A8B1C849863007776D7 /* SceneKitVRSample.app */,
-				ECA41A8C1C849992007776D7 /* SceneKitVRSample.xctest */,
-				ECA41A8D1C8499AC007776D7 /* SceneKitVRSample.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,10 +113,11 @@
 				ECA41A6D1C849811007776D7 /* Main.storyboard */,
 				ECA41A6F1C849811007776D7 /* Extensions.swift */,
 				ECA41A701C849811007776D7 /* Info.plist */,
-				ECA41A721C849811007776D7 /* SceneManager.swift */,
+				ECA41A721C849811007776D7 /* SampleSceneComposer.swift */,
 				ECA41A731C849811007776D7 /* Utilities.swift */,
 				ECA41A741C849811007776D7 /* ViewController.swift */,
 				ECA41A751C849811007776D7 /* VRCamera.swift */,
+				EC5D4C6E1C86F675005B14E6 /* CameraController.swift */,
 			);
 			path = SceneKitVRSample;
 			sourceTree = "<group>";
@@ -278,8 +279,9 @@
 			files = (
 				ECA41A7F1C849811007776D7 /* ViewController.swift in Sources */,
 				ECA41A761C849811007776D7 /* AppDelegate.swift in Sources */,
+				EC5D4C6F1C86F675005B14E6 /* CameraController.swift in Sources */,
 				ECA41A801C849811007776D7 /* VRCamera.swift in Sources */,
-				ECA41A7D1C849811007776D7 /* SceneManager.swift in Sources */,
+				ECA41A7D1C849811007776D7 /* SampleSceneComposer.swift in Sources */,
 				ECA41A7E1C849811007776D7 /* Utilities.swift in Sources */,
 				ECA41A7A1C849811007776D7 /* Extensions.swift in Sources */,
 			);

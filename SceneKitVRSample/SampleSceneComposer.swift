@@ -8,26 +8,22 @@
 
 import SceneKit
 
-class SceneManager {
+class SampleSceneComposer {
     
     let scene:SCNScene
+    
     var roomWidth:Float = 10.0
     var roomHeight:Float = 3.0
     let spotlightTemplate:SCNLight = SCNLight()
     
-    init(let scene:SCNScene)
+    init(scene:SCNScene, width:Float, height:Float)
     {
         self.scene = scene
-    }
-    
-    func generateRoom(width:Float, height:Float) {
-        
         setRoomSize(width, height: height)
-        generateFloor("samples.scnassets/wood.png")
-        generateWalls("samples.scnassets/wall.jpg")
-        addLights()
+        loadFloor("samples.scnassets/wood.png")
+        loadWalls("samples.scnassets/wall.jpg")
+        loadLights()
     }
-
     
     func setRoomSize(width:Float, height:Float)
     {
@@ -35,8 +31,31 @@ class SceneManager {
         roomHeight = height
     }
     
+    func loadObject(model:ModelInformation, position:SCNVector3, rotation:SCNVector4, spotlight:Bool) {
+        
+        let node = SCNNode()
+        if let modelNode = ModelLoader.load(model)
+        {
+            node.addChildNode(modelNode)
+            
+            if(spotlight)
+            {
+                let spotlightNode = SCNNode()
+                
+                spotlightNode.light = spotlightTemplate
+                spotlightNode.rotation = SCNVector4Make(1, 0, 0, -Float(M_PI_2));
+                spotlightNode.position = SCNVector3Make(0, roomHeight, 0)
+                
+                node.addChildNode(spotlightNode)
+            }
+            node.position = position
+            node.rotation = rotation
+            scene.rootNode.addChildNode(node)
+        }
+    }
     
-    func generateFloor(textureName:String) {
+    
+    private func loadFloor(textureName:String) {
         
         //Floor
         let floor = SCNFloor()
@@ -54,7 +73,7 @@ class SceneManager {
         
     }
     
-    func generateWalls(textureName:String) {
+    private func loadWalls(textureName:String) {
         
         //Walls
         let halfWidth:Float = roomWidth / 2
@@ -101,7 +120,7 @@ class SceneManager {
         
     }
     
-    func addLights() {
+    private func loadLights() {
         
         spotlightTemplate.type = SCNLightTypeSpot
         spotlightTemplate.color = UIColor(white: 1.0, alpha: 1.0)
@@ -135,27 +154,5 @@ class SceneManager {
         
     }
     
-    func addModel(model:ModelInformation, position:SCNVector3, rotation:SCNVector4, spotlight:Bool) {
-        
-        let node = SCNNode()
-        if let modelNode = ModelLoader.load(model)
-        {
-            node.addChildNode(modelNode)
-
-            if(spotlight)
-            {                
-                let spotlightNode = SCNNode()
-                
-                spotlightNode.light = spotlightTemplate
-                spotlightNode.rotation = SCNVector4Make(1, 0, 0, -Float(M_PI_2));
-                spotlightNode.position = SCNVector3Make(0, roomHeight, 0)
-                                
-                node.addChildNode(spotlightNode)
-            }
-            node.position = position
-            node.rotation = rotation
-            scene.rootNode.addChildNode(node)
-        }
-    }
     
 }
